@@ -334,9 +334,9 @@
 
       
         
-          <h1 id="用正则表达式进行搜索"><a href="#用正则表达式进行搜索" class="headerlink" title="用正则表达式进行搜索"></a>用正则表达式进行搜索</h1><h2 id="匹配任意个字符（REGEXP）"><a href="#匹配任意个字符（REGEXP）" class="headerlink" title="匹配任意个字符（REGEXP）"></a>匹配任意个字符（<code>REGEXP</code>）</h2><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;可乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;%可乐%&#39;</code></p>
-<h2 id="匹配任意一个字符（-号）"><a href="#匹配任意一个字符（-号）" class="headerlink" title="匹配任意一个字符（.号）"></a>匹配任意一个字符（<code>.</code>号）</h2><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;百事.乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;百事_乐&#39;</code></p>
-<h2 id="搜索两个串之一（-号）"><a href="#搜索两个串之一（-号）" class="headerlink" title="搜索两个串之一（|号）"></a>搜索两个串之一（<code>|</code>号）</h2><p><code>SELECT product_id,product_name&#39; FROM products WHERE product_name REGEXP &#39;可乐|薯片|辣条&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;可乐&#39; OR product_name LIKE &#39;薯片&#39; OR product_name LIKE &#39;辣条&#39;</code></p>
+          <h1 id="匹配任意个字符（REGEXP）"><a href="#匹配任意个字符（REGEXP）" class="headerlink" title="匹配任意个字符（REGEXP）"></a>匹配任意个字符（<code>REGEXP</code>）</h1><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;可乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;%可乐%&#39;</code></p>
+<h1 id="匹配任意一个字符（-号）"><a href="#匹配任意一个字符（-号）" class="headerlink" title="匹配任意一个字符（.号）"></a>匹配任意一个字符（<code>.</code>号）</h1><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;百事.乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;百事_乐&#39;</code></p>
+<h1 id="搜索两个串之一（-号）"><a href="#搜索两个串之一（-号）" class="headerlink" title="搜索两个串之一（|号）"></a>搜索两个串之一（<code>|</code>号）</h1><p><code>SELECT product_id,product_name&#39; FROM products WHERE product_name REGEXP &#39;可乐|薯片|辣条&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;可乐&#39; OR product_name LIKE &#39;薯片&#39; OR product_name LIKE &#39;辣条&#39;</code></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/05/（二）MySQL用正则表达式进行搜索/#more" rel="contents">
