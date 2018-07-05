@@ -190,6 +190,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -218,6 +228,154 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/（二）MySQL用正则表达式进行搜索/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/05/（二）MySQL用正则表达式进行搜索/" itemprop="url">（二）MySQL用正则表达式进行搜索</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T16:24:35+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="用正则表达式进行搜索"><a href="#用正则表达式进行搜索" class="headerlink" title="用正则表达式进行搜索"></a>用正则表达式进行搜索</h1><h2 id="匹配任意个字符（REGEXP）"><a href="#匹配任意个字符（REGEXP）" class="headerlink" title="匹配任意个字符（REGEXP）"></a>匹配任意个字符（<code>REGEXP</code>）</h2><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;可乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;%可乐%&#39;</code></p>
+<h2 id="匹配任意一个字符（-号）"><a href="#匹配任意一个字符（-号）" class="headerlink" title="匹配任意一个字符（.号）"></a>匹配任意一个字符（<code>.</code>号）</h2><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;百事.乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;百事_乐&#39;</code></p>
+<h2 id="搜索两个串之一（-号）"><a href="#搜索两个串之一（-号）" class="headerlink" title="搜索两个串之一（|号）"></a>搜索两个串之一（<code>|</code>号）</h2><p><code>SELECT product_id,product_name&#39; FROM products WHERE product_name REGEXP &#39;可乐|薯片|辣条&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;可乐&#39; OR product_name LIKE &#39;薯片&#39; OR product_name LIKE &#39;辣条&#39;</code></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/05/（二）MySQL用正则表达式进行搜索/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -327,8 +485,6 @@
           <h1 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h1><h2 id="显示数据库结构"><a href="#显示数据库结构" class="headerlink" title="显示数据库结构"></a>显示数据库结构</h2><p><code>SHOW COLUMNS FROM table_name</code><br>或<br><code>DESC table_name</code><br>或<br><code>DESCRIBLE table_name</code><br><em>MySQL支持用DESCRIBLE作为SHOW COLUMNS的简写</em></p>
 <h2 id="显示广泛的服务器状态信息"><a href="#显示广泛的服务器状态信息" class="headerlink" title="显示广泛的服务器状态信息"></a>显示广泛的服务器状态信息</h2><p> <code>SHOW STATUS</code></p>
 <h2 id="显示创建特定数据库或表的MySQL语句"><a href="#显示创建特定数据库或表的MySQL语句" class="headerlink" title="显示创建特定数据库或表的MySQL语句"></a>显示创建特定数据库或表的MySQL语句</h2><p><code>SHOW CREATE DATABASE database_name</code><br>或<br><code>SHOW CREATE TABLE table_name</code></p>
-<h2 id="显示授权用户-所有用户或特定用户-的安全权限"><a href="#显示授权用户-所有用户或特定用户-的安全权限" class="headerlink" title="显示授权用户(所有用户或特定用户)的安全权限"></a>显示授权用户(所有用户或特定用户)的安全权限</h2><p><code>SHOW GRANTS</code></p>
-<h2 id="显示服务器错误-警告信息"><a href="#显示服务器错误-警告信息" class="headerlink" title="显示服务器错误/警告信息"></a>显示服务器错误/警告信息</h2><p><code>SHOW ERRORS</code>/<code>SHOW WARNINGS</code></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/03/（一）MySQL基本语句、数据检索、数据过滤、通配符/#more" rel="contents">
@@ -712,7 +868,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -722,10 +878,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
-                
+                </a>
               </div>
             
 
@@ -734,7 +890,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

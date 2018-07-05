@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="Zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,正则表达式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="用正则表达式进行搜索匹配任意个字符（REGEXP）SELECT product_id,product_name FROM products WHERE product_name REGEXP &amp;#39;可乐&amp;#39;等价于SELECT product_id,product_name FROM products WHERE product_name LIKE &amp;#39;%可乐%&amp;#39; 匹配任意一">
+<meta name="keywords" content="MySQL,正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（二）MySQL用正则表达式进行搜索">
+<meta property="og:url" content="http://yoursite.com/2018/07/05/（二）MySQL用正则表达式进行搜索/index.html">
+<meta property="og:site_name" content="晨">
+<meta property="og:description" content="用正则表达式进行搜索匹配任意个字符（REGEXP）SELECT product_id,product_name FROM products WHERE product_name REGEXP &amp;#39;可乐&amp;#39;等价于SELECT product_id,product_name FROM products WHERE product_name LIKE &amp;#39;%可乐%&amp;#39; 匹配任意一">
+<meta property="og:locale" content="Zh-Hans">
+<meta property="og:updated_time" content="2018-07-05T08:25:17.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="（二）MySQL用正则表达式进行搜索">
+<meta name="twitter:description" content="用正则表达式进行搜索匹配任意个字符（REGEXP）SELECT product_id,product_name FROM products WHERE product_name REGEXP &amp;#39;可乐&amp;#39;等价于SELECT product_id,product_name FROM products WHERE product_name LIKE &amp;#39;%可乐%&amp;#39; 匹配任意一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/05/（二）MySQL用正则表达式进行搜索/"/>
+
+
+
+
+
+  <title>（二）MySQL用正则表达式进行搜索 | 晨</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/05/（二）MySQL用正则表达式进行搜索/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">（二）MySQL用正则表达式进行搜索</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-05T16:24:35+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="用正则表达式进行搜索"><a href="#用正则表达式进行搜索" class="headerlink" title="用正则表达式进行搜索"></a>用正则表达式进行搜索</h1><h2 id="匹配任意个字符（REGEXP）"><a href="#匹配任意个字符（REGEXP）" class="headerlink" title="匹配任意个字符（REGEXP）"></a>匹配任意个字符（<code>REGEXP</code>）</h2><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;可乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;%可乐%&#39;</code></p>
+<h2 id="匹配任意一个字符（-号）"><a href="#匹配任意一个字符（-号）" class="headerlink" title="匹配任意一个字符（.号）"></a>匹配任意一个字符（<code>.</code>号）</h2><p><code>SELECT product_id,product_name FROM products WHERE product_name REGEXP &#39;百事.乐&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;百事_乐&#39;</code></p>
+<h2 id="搜索两个串之一（-号）"><a href="#搜索两个串之一（-号）" class="headerlink" title="搜索两个串之一（|号）"></a>搜索两个串之一（<code>|</code>号）</h2><p><code>SELECT product_id,product_name&#39; FROM products WHERE product_name REGEXP &#39;可乐|薯片|辣条&#39;</code><br>等价于<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;可乐&#39; OR product_name LIKE &#39;薯片&#39; OR product_name LIKE &#39;辣条&#39;</code></p>
+<a id="more"></a>
+<h2 id="匹配含特定字符的项目-n个条件字符-名称"><a href="#匹配含特定字符的项目-n个条件字符-名称" class="headerlink" title="匹配含特定字符的项目([n个条件字符]名称)"></a>匹配含特定字符的项目(<code>[n个条件字符]名称</code>)</h2><p><strong><em>例：筛选出商品中的绿茶、红茶、奶茶</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;[绿红奶]茶&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;[绿|红|奶]茶&apos;</span><br></pre></td></tr></table></figure></p>
+<p>[]是另一种形式的OR语句。事实上，正则表达式[123]Ton为[1|2|3]Ton的缩写，也可以使用后者。</p>
+<h2 id="匹配除特定字符之外的项目-n个条件字符-名称"><a href="#匹配除特定字符之外的项目-n个条件字符-名称" class="headerlink" title="匹配除特定字符之外的项目(^[n个条件字符]名称)"></a>匹配除特定字符之外的项目(<code>^[n个条件字符]名称</code>)</h2><p>字符集合也可以被否定，即，它们将匹配除指定字符外的任何东西。为否定一个字符集，在集合的开始处放置一个^即可。因此，尽管<code>[123]</code>匹配字符1、2或3，但<code>[^123]</code>却匹配除这些字符外的任何东西。</p>
+<p><strong><em>例：有绿茶、红茶、奶茶、菊花茶等茶 筛选出除了红茶、奶茶外的其他所有的茶</em></strong><br><figure class="highlight plain"><figcaption><span>product_id,product_name </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM products </span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;^[绿|红|奶]茶&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="匹配含特定范围字符的项目-字符集合-名称"><a href="#匹配含特定范围字符的项目-字符集合-名称" class="headerlink" title="匹配含特定范围字符的项目([字符集合]名称)"></a>匹配含特定范围字符的项目(<code>[字符集合]名称</code>)</h2><p><strong><em>例1:筛选出id为15、25、35、45的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_id </span><br><span class="line">REGEXP &apos;[1-4]5&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_id </span><br><span class="line">REGEXP &apos;[1234]5&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_id </span><br><span class="line">REGEXP &apos;[1|2|3|4]5&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>例2:筛选出id为a1、b1、c1、d1的商品</em></strong><br><figure class="highlight plain"><figcaption><span>product_id,product_name </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FROM products </span><br><span class="line">WHERE product_id </span><br><span class="line">REGEXP &apos;[a-d]1&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="匹配含特殊字符的项目-、-、-、-等"><a href="#匹配含特殊字符的项目-、-、-、-等" class="headerlink" title="匹配含特殊字符的项目(.、[]、|、-等)"></a>匹配含特殊字符的项目(<code>.</code>、<code>[]</code>、<code>|</code>、<code>-</code>等)</h2><p>***例:筛选出名称中含<code>[]</code>的食品<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;\\[]&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="匹配字符类-Posix字符类"><a href="#匹配字符类-Posix字符类" class="headerlink" title="匹配字符类(Posix字符类)"></a>匹配字符类(<code>Posix字符类</code>)</h2><p>存在找出你自己经常使用的数字、所有字母字符或所有数字字母字符等的匹配。为更方便工作，可以使用预定义的字符集，称为字符类（character class）。<br>类        说 明<br>[:alnum:] 任意字母和数字（同[a-zA-Z0-9]）<br>[:alpha:] 任意字符（同[a-zA-Z]）<br>[:blank:] 空格和制表（同[\t]）<br>[:cntrl:] ASCII控制字符（ASCII 0到31和127）<br>[:digit:] 任意数字（同[0-9]）<br>[:graph:] 与[:print:]相同，但不包括空格<br>[:lower:] 任意小写字母（同[a-z]）<br>[:print:] 任意可打印字符<br>[:punct:] 既不在[:alnum:]又不在[:cntrl:]中的任意字符<br>[:space:] 包括空格在内的任意空白字符（同[\f\n\r\t\v]）<br>[:upper:] 任意大写字母（同[A-Z]）<br>[:xdigit:] 任意十六进制数字（同[a-fA-F0-9]）</p>
+<p><code>[]</code>是Posix字符类本身的组成部分，所以Posix字符类在使用的时候需要在外面加一层[],例如<code>[[:digit:]]</code><br><strong><em>例:筛选出id在10-100间id的个位数为5的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_id </span><br><span class="line">REGEXP &apos;[[:digit:]]5&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="匹配多个实例（重复元字符）"><a href="#匹配多个实例（重复元字符）" class="headerlink" title="匹配多个实例（重复元字符）"></a>匹配多个实例（<code>重复元字符</code>）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">元 字 符 说 明</span><br><span class="line">*     0个或多个匹配</span><br><span class="line">+     1个或多个匹配（等于&#123;1,&#125;）</span><br><span class="line">?     0个或1个匹配（等于&#123;0,1&#125;）</span><br><span class="line">&#123;n&#125;   指定数目的匹配</span><br><span class="line">&#123;n,&#125;  不少于指定数目的匹配</span><br><span class="line">&#123;n,m&#125; 匹配数目的范围（m不超过255）</span><br></pre></td></tr></table></figure>
+<p><strong><em>例1：商品表中有以下几条数据，将其从表中筛选出</em></strong><br>product_id product_name<br>    1           TNT(1 stick)<br>    2           TNT(2 sticks)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;\\([1-2] sticks?\\)&apos; </span><br><span class="line">ORDER BY product_id</span><br></pre></td></tr></table></figure></p>
+<p>\(匹配)，[0-9]匹配任意数字（这个例子中为1和5），sticks?匹配stick和sticks（s后的?使s可选，因为?匹配它前面的任何字符的0次或1次出现），\)匹配)。没有?，匹配stick和sticks会非常困难。</p>
+<p><strong><em>例2：筛选出商品表中商品名称带有数字的所有商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;[0-9]+&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;[[:digit:]]+&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="定位元字符"><a href="#定位元字符" class="headerlink" title="定位元字符"></a>定位元字符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">元 字 符 说 明</span><br><span class="line">^       文本的开始</span><br><span class="line">$       文本的结尾</span><br><span class="line">[[:&lt;:]] 词的开始</span><br><span class="line">[[:&gt;:]] 词的结尾</span><br></pre></td></tr></table></figure>
+<p>如果想找出以一个数（包括以小数点开始的数）开始的所有产品，怎么办？简单搜索[0-9\.]（或[[:digit:]\.]）不行，因为它将在文本内任意位置查找匹配。解决办法是使用^定位符。</p>
+<p><strong><em>例1:筛选商品名称以<code>哇哈哈</code>开头的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;^娃哈哈&apos;</span><br></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">LIKE &apos;娃哈哈%&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>例2:筛选商品名称以<code>可乐</code>结尾的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;可乐$&apos;</span><br></pre></td></tr></table></figure></p>
+<p>等价于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">LIKE &apos;%可乐&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>例3:例如商品名称为 可乐 1234 可以通过以下语句找到它</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;[[:&lt;:]]可&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;[[:&lt;:]]123&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;乐[[:&gt;:]]&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name</span><br><span class="line">FROM products</span><br><span class="line">WHERE product_name </span><br><span class="line">REGEXP &apos;234[[:&gt;:]]&apos;</span><br></pre></td></tr></table></figure></p>
+<h2 id="简单的正则表达式自我测试"><a href="#简单的正则表达式自我测试" class="headerlink" title="简单的正则表达式自我测试"></a>简单的正则表达式自我测试</h2><p>可以在不使用数据库表的情况下用SELECT来测试正则表达式。REGEXP检查总是返回0（没有匹配）或1（匹配）。可以用带文字串的REGEXP来测试表达式，并试验它们。相应的语法如下：<br><code>SELECT &#39;hello&#39; REGEXP &#39;[0-9]&#39;</code><br>这个例子显然将返回0（因为文本hello中没有数字）。</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>正则表达式匹配不区分大小写</strong> MySQL中的正则表达式匹配（自版本3.23.4后）不区分大小写（即，大写和小写都匹配）。为区分大小写，可使用<code>BINARY</code>关键字，如<code>WHERE product_name REGEXP BINARY &#39;JetPack .000&#39;</code>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL-正则表达式/" rel="tag"># MySQL,正则表达式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/03/（一）MySQL基本语句、数据检索、数据过滤、通配符/" rel="next" title="（一）MySQL基本语句、数据检索、数据过滤、通配符">
+                <i class="fa fa-chevron-left"></i> （一）MySQL基本语句、数据检索、数据过滤、通配符
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JiachengLai" />
+            
+              <p class="site-author-name" itemprop="name">JiachengLai</p>
+              <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，绝知此事要躬行</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用正则表达式进行搜索"><span class="nav-number">1.</span> <span class="nav-text">用正则表达式进行搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配任意个字符（REGEXP）"><span class="nav-number">1.1.</span> <span class="nav-text">匹配任意个字符（REGEXP）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配任意一个字符（-号）"><span class="nav-number">1.2.</span> <span class="nav-text">匹配任意一个字符（.号）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索两个串之一（-号）"><span class="nav-number">1.3.</span> <span class="nav-text">搜索两个串之一（|号）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配含特定字符的项目-n个条件字符-名称"><span class="nav-number">1.4.</span> <span class="nav-text">匹配含特定字符的项目([n个条件字符]名称)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配除特定字符之外的项目-n个条件字符-名称"><span class="nav-number">1.5.</span> <span class="nav-text">匹配除特定字符之外的项目(^[n个条件字符]名称)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配含特定范围字符的项目-字符集合-名称"><span class="nav-number">1.6.</span> <span class="nav-text">匹配含特定范围字符的项目([字符集合]名称)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配含特殊字符的项目-、-、-、-等"><span class="nav-number">1.7.</span> <span class="nav-text">匹配含特殊字符的项目(.、[]、|、-等)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配字符类-Posix字符类"><span class="nav-number">1.8.</span> <span class="nav-text">匹配字符类(Posix字符类)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#匹配多个实例（重复元字符）"><span class="nav-number">1.9.</span> <span class="nav-text">匹配多个实例（重复元字符）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定位元字符"><span class="nav-number">1.10.</span> <span class="nav-text">定位元字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单的正则表达式自我测试"><span class="nav-number">1.11.</span> <span class="nav-text">简单的正则表达式自我测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.12.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JiachengLai</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="晨">
 <meta property="og:description" content="基本语句显示数据库结构SHOW COLUMNS FROM table_name或DESC table_name或DESCRIBLE table_nameMySQL支持用DESCRIBLE作为SHOW COLUMNS的简写 显示广泛的服务器状态信息 SHOW STATUS 显示创建特定数据库或表的MySQL语句SHOW CREATE DATABASE database_name或SHOW CREAT">
 <meta property="og:locale" content="Zh-Hans">
-<meta property="og:updated_time" content="2018-07-05T04:10:58.066Z">
+<meta property="og:updated_time" content="2018-07-05T08:26:10.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（一）MySQL基本语句、数据检索、数据过滤、通配符">
 <meta name="twitter:description" content="基本语句显示数据库结构SHOW COLUMNS FROM table_name或DESC table_name或DESCRIBLE table_nameMySQL支持用DESCRIBLE作为SHOW COLUMNS的简写 显示广泛的服务器状态信息 SHOW STATUS 显示创建特定数据库或表的MySQL语句SHOW CREATE DATABASE database_name或SHOW CREAT">
@@ -187,6 +187,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -325,9 +335,9 @@
         <h1 id="基本语句"><a href="#基本语句" class="headerlink" title="基本语句"></a>基本语句</h1><h2 id="显示数据库结构"><a href="#显示数据库结构" class="headerlink" title="显示数据库结构"></a>显示数据库结构</h2><p><code>SHOW COLUMNS FROM table_name</code><br>或<br><code>DESC table_name</code><br>或<br><code>DESCRIBLE table_name</code><br><em>MySQL支持用DESCRIBLE作为SHOW COLUMNS的简写</em></p>
 <h2 id="显示广泛的服务器状态信息"><a href="#显示广泛的服务器状态信息" class="headerlink" title="显示广泛的服务器状态信息"></a>显示广泛的服务器状态信息</h2><p> <code>SHOW STATUS</code></p>
 <h2 id="显示创建特定数据库或表的MySQL语句"><a href="#显示创建特定数据库或表的MySQL语句" class="headerlink" title="显示创建特定数据库或表的MySQL语句"></a>显示创建特定数据库或表的MySQL语句</h2><p><code>SHOW CREATE DATABASE database_name</code><br>或<br><code>SHOW CREATE TABLE table_name</code></p>
+<a id="more"></a>
 <h2 id="显示授权用户-所有用户或特定用户-的安全权限"><a href="#显示授权用户-所有用户或特定用户-的安全权限" class="headerlink" title="显示授权用户(所有用户或特定用户)的安全权限"></a>显示授权用户(所有用户或特定用户)的安全权限</h2><p><code>SHOW GRANTS</code></p>
 <h2 id="显示服务器错误-警告信息"><a href="#显示服务器错误-警告信息" class="headerlink" title="显示服务器错误/警告信息"></a>显示服务器错误/警告信息</h2><p><code>SHOW ERRORS</code>/<code>SHOW WARNINGS</code></p>
-<a id="more"></a>
 <h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p>1、<strong>SQL语句和大小写</strong> 请注意，SQL语句不区分大小写，因此SELECT与select是相同的。同样，写成Select也没有关系。许多SQL开发人员喜欢对所有SQL关键字使用大写，而对所有列和表名使用小写，这样做使代码更易于阅读和调试。</p>
 <p>2、<strong>使用空格</strong>在处理SQL语句时，其中所有空格都被忽略。SQL语句可以在一行上给出，也可以分成许多行。多数SQL开发人员认为将SQL语句分成多行更容易阅读和调试。</p>
 <hr>
@@ -336,10 +346,9 @@
 <h2 id="以某列的字母顺序排序"><a href="#以某列的字母顺序排序" class="headerlink" title="以某列的字母顺序排序"></a>以某列的字母顺序排序</h2><p><code>SELECT * FROM table_name ORDER BY column_name</code></p>
 <h2 id="按多个列顺序排序"><a href="#按多个列顺序排序" class="headerlink" title="按多个列顺序排序"></a>按多个列顺序排序</h2><p><strong><em>例:按商品价格和商品名称升序排序</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_price,product_name</span><br><span class="line">FROM products</span><br><span class="line">ORDER BY product_price,product_name</span><br></pre></td></tr></table></figure></p>
 <h2 id="指定排序方向"><a href="#指定排序方向" class="headerlink" title="指定排序方向"></a>指定排序方向</h2><p><code>ORDER BY ASC</code>ASC是ascending(升序),默认排序方式，是升序排序（从小到大,从低到高排序）<br><code>ORDER BY DESC</code>DESC是descending(降序)降序排序（从大到小,从高到低排序）<br><strong><em>例:按商品价格降序排序和商品名称升序排序</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_price,product_name</span><br><span class="line">FROM products</span><br><span class="line">ORDER BY product_price DESC,product_name</span><br></pre></td></tr></table></figure></p>
-<h2 id="注意-1"><a href="#注意-1" class="headerlink" title="注意:"></a>注意:</h2><p><strong>在对文本性的数据进行排序时</strong>，A与a相同吗？a位于B之前还是位于Z之后？这些问题不是理论问题，其答案取决于数据库如何设置。<br>在字典（dictionary）排序顺序中，A被视为与a相同，这是MySQL（和大多数数据库管理系统）的默认行为。但是，许多数据库管理员能够在需要时改变这种行为（如果你的数据库包含大量外语字符，可能必须这样做）。<br>这里，关键的问题是，如果确实需要改变这种排序顺序，用简单的ORDER BY子句做不到。你必须请求数据库管理员的帮助。</p>
+<h2 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h2><p><strong>在对文本性的数据进行排序时</strong>，A与a相同吗？a位于B之前还是位于Z之后？这些问题不是理论问题，其答案取决于数据库如何设置。<br>在字典（dictionary）排序顺序中，A被视为与a相同，这是MySQL（和大多数数据库管理系统）的默认行为。但是，许多数据库管理员能够在需要时改变这种行为（如果你的数据库包含大量外语字符，可能必须这样做）。<br>这里，关键的问题是，如果确实需要改变这种排序顺序，用简单的ORDER BY子句做不到。你必须请求数据库管理员的帮助。</p>
 <hr>
-<h1 id="数据过滤"><a href="#数据过滤" class="headerlink" title="数据过滤"></a>数据过滤</h1><h2 id="操-作-符-说-明"><a href="#操-作-符-说-明" class="headerlink" title="操 作 符 说 明"></a>操 作 符 说 明</h2><p>=  等于<br>&lt;&gt; 不等于<br>!= 不等于<br>&lt;  小于<br>&lt;= 小于等于<br>>  大于<br>>= 大于等于</p>
-<p>BETWEEN 在指定的两个值之间</p>
+<h1 id="数据过滤"><a href="#数据过滤" class="headerlink" title="数据过滤"></a>数据过滤</h1><h2 id="操作符说明"><a href="#操作符说明" class="headerlink" title="操作符说明"></a>操作符说明</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">=       等于</span><br><span class="line">&lt;&gt;      不等于</span><br><span class="line">!=      不等于</span><br><span class="line">&lt;       小于</span><br><span class="line">&lt;=      小于等于</span><br><span class="line">\&gt;      大于</span><br><span class="line">\&gt;=     大于等于</span><br><span class="line">BETWEEN 在指定的两个值之间</span><br></pre></td></tr></table></figure>
 <h2 id="不匹配检查"><a href="#不匹配检查" class="headerlink" title="不匹配检查"></a>不匹配检查</h2><p><code>SELECT product_id,product_name FROM products WHERE product_id!=1003</code><br>或<br><code>SELECT product_id,product_name FROM products WHERE product_id &lt;&gt; 1003</code></p>
 <h2 id="空值检查"><a href="#空值检查" class="headerlink" title="空值检查"></a>空值检查</h2><p><code>SELECT product_id,product_name FROM products WHERE product_name IS NULL</code></p>
 <h2 id="IN操作符"><a href="#IN操作符" class="headerlink" title="IN操作符"></a><code>IN</code>操作符</h2><p><code>IN</code>是WHERE子句中用来指定要匹配值的清单的关键字，功能与OR相当。</p>
@@ -350,8 +359,8 @@
 <p><strong>为什么使用NOT？</strong><br>对于简单的WHERE子句，使用NOT确实没有什么优势。但在更复杂的子句中，NOT是非常有用的。例如，在与IN操作符联合使用时，NOT使找出与条件列表不匹配的行非常简单。</p>
 <h2 id="注意-2"><a href="#注意-2" class="headerlink" title="注意"></a>注意</h2><p><strong>WHERE子句的位置</strong><br>在同时使用ORDER BY和WHERE子句时，应该让ORDER BY位于WHERE之后，否则将会产生错误。</p>
 <hr>
-<h1 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h1><h2 id="任意字符通配符-号"><a href="#任意字符通配符-号" class="headerlink" title="任意字符通配符(%号)"></a>任意字符通配符(<code>%号</code>)</h2><p><strong><em>例1：匹配商品名称任何位置包含’可乐’的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name LIKE &apos;%可乐%</span><br></pre></td></tr></table></figure></p>
-<p><strong><em>例2：匹配商品名称以’百事’开头，以’乐’结尾的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name LIKE &apos;百事%乐&apos;</span><br></pre></td></tr></table></figure></p>
+<h1 id="通配符"><a href="#通配符" class="headerlink" title="通配符"></a>通配符</h1><h2 id="任意字符通配符-号"><a href="#任意字符通配符-号" class="headerlink" title="任意字符通配符(%号)"></a>任意字符通配符(<code>%号</code>)</h2><p><strong><em>例1：匹配商品名称任何位置包含’可乐’的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name </span><br><span class="line">LIKE &apos;%可乐%</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>例2：匹配商品名称以’百事’开头，以’乐’结尾的商品</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">FROM products </span><br><span class="line">WHERE product_name </span><br><span class="line">LIKE &apos;百事%乐&apos;</span><br></pre></td></tr></table></figure></p>
 <p>重要的是,要注意到，除了一个或多个字符外，%还能匹配0个字符。<code>%</code>代表搜索模式中给定位置的0个、1个或多个字符。</p>
 <p><strong>注意NULL</strong> 虽然似乎%通配符可以匹配任何 ，但有一个例外，即NULL。即使是WHERE product_name LIKE ‘%’也不能匹配用值NULL作为产品名的行。</p>
 <h2 id="单字符通配符-下划线"><a href="#单字符通配符-下划线" class="headerlink" title="单字符通配符(下划线_)"></a>单字符通配符(下划线<code>_</code>)</h2><p>下划线（_）。下划线的用途与%一样，但下划线只匹配单个字符而不是多个字符。<br><code>SELECT product_id,product_name FROM products WHERE product_name LIKE &#39;百事_乐&#39;</code></p>
@@ -396,6 +405,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/05/（二）MySQL用正则表达式进行搜索/" rel="prev" title="（二）MySQL用正则表达式进行搜索">
+                （二）MySQL用正则表达式进行搜索 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -476,7 +489,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -486,10 +499,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">categories</span>
-                
+                </a>
               </div>
             
 
@@ -498,7 +511,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -531,7 +544,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本语句"><span class="nav-number">1.</span> <span class="nav-text">基本语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#显示数据库结构"><span class="nav-number">1.1.</span> <span class="nav-text">显示数据库结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示广泛的服务器状态信息"><span class="nav-number">1.2.</span> <span class="nav-text">显示广泛的服务器状态信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示创建特定数据库或表的MySQL语句"><span class="nav-number">1.3.</span> <span class="nav-text">显示创建特定数据库或表的MySQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示授权用户-所有用户或特定用户-的安全权限"><span class="nav-number">1.4.</span> <span class="nav-text">显示授权用户(所有用户或特定用户)的安全权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示服务器错误-警告信息"><span class="nav-number">1.5.</span> <span class="nav-text">显示服务器错误/警告信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.6.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据检索"><span class="nav-number">2.</span> <span class="nav-text">数据检索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#消除重复行"><span class="nav-number">2.1.</span> <span class="nav-text">消除重复行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用完全限定的表名"><span class="nav-number">2.2.</span> <span class="nav-text">使用完全限定的表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以某列的字母顺序排序"><span class="nav-number">2.3.</span> <span class="nav-text">以某列的字母顺序排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按多个列顺序排序"><span class="nav-number">2.4.</span> <span class="nav-text">按多个列顺序排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定排序方向"><span class="nav-number">2.5.</span> <span class="nav-text">指定排序方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-1"><span class="nav-number">2.6.</span> <span class="nav-text">注意:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据过滤"><span class="nav-number">3.</span> <span class="nav-text">数据过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操-作-符-说-明"><span class="nav-number">3.1.</span> <span class="nav-text">操 作 符 说 明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不匹配检查"><span class="nav-number">3.2.</span> <span class="nav-text">不匹配检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空值检查"><span class="nav-number">3.3.</span> <span class="nav-text">空值检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IN操作符"><span class="nav-number">3.4.</span> <span class="nav-text">IN操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NOT操作符"><span class="nav-number">3.5.</span> <span class="nav-text">NOT操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-2"><span class="nav-number">3.6.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通配符"><span class="nav-number">4.</span> <span class="nav-text">通配符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任意字符通配符-号"><span class="nav-number">4.1.</span> <span class="nav-text">任意字符通配符(%号)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单字符通配符-下划线"><span class="nav-number">4.2.</span> <span class="nav-text">单字符通配符(下划线_)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-3"><span class="nav-number">4.3.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本语句"><span class="nav-number">1.</span> <span class="nav-text">基本语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#显示数据库结构"><span class="nav-number">1.1.</span> <span class="nav-text">显示数据库结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示广泛的服务器状态信息"><span class="nav-number">1.2.</span> <span class="nav-text">显示广泛的服务器状态信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示创建特定数据库或表的MySQL语句"><span class="nav-number">1.3.</span> <span class="nav-text">显示创建特定数据库或表的MySQL语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示授权用户-所有用户或特定用户-的安全权限"><span class="nav-number">1.4.</span> <span class="nav-text">显示授权用户(所有用户或特定用户)的安全权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示服务器错误-警告信息"><span class="nav-number">1.5.</span> <span class="nav-text">显示服务器错误/警告信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">1.6.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据检索"><span class="nav-number">2.</span> <span class="nav-text">数据检索</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#消除重复行"><span class="nav-number">2.1.</span> <span class="nav-text">消除重复行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用完全限定的表名"><span class="nav-number">2.2.</span> <span class="nav-text">使用完全限定的表名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以某列的字母顺序排序"><span class="nav-number">2.3.</span> <span class="nav-text">以某列的字母顺序排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按多个列顺序排序"><span class="nav-number">2.4.</span> <span class="nav-text">按多个列顺序排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指定排序方向"><span class="nav-number">2.5.</span> <span class="nav-text">指定排序方向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-1"><span class="nav-number">2.6.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据过滤"><span class="nav-number">3.</span> <span class="nav-text">数据过滤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作符说明"><span class="nav-number">3.1.</span> <span class="nav-text">操作符说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不匹配检查"><span class="nav-number">3.2.</span> <span class="nav-text">不匹配检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空值检查"><span class="nav-number">3.3.</span> <span class="nav-text">空值检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IN操作符"><span class="nav-number">3.4.</span> <span class="nav-text">IN操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NOT操作符"><span class="nav-number">3.5.</span> <span class="nav-text">NOT操作符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-2"><span class="nav-number">3.6.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通配符"><span class="nav-number">4.</span> <span class="nav-text">通配符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#任意字符通配符-号"><span class="nav-number">4.1.</span> <span class="nav-text">任意字符通配符(%号)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单字符通配符-下划线"><span class="nav-number">4.2.</span> <span class="nav-text">单字符通配符(下划线_)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-3"><span class="nav-number">4.3.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
             
 
           </div>
