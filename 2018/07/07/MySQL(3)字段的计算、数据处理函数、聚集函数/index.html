@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="Zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,正则表达式," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="字段计算存储在数据库表中的数据一般不是应用程序所需要的格式。下面举几个例子。 如果想在一个字段中既显示公司名，又显示公司的地址，但这两个信息一般包含在不同的表列中。 城市、州和邮政编码存储在不同的列中（应该这样），但邮件标签打印程序却需要把它们作为一个恰当格式的字段检索出来。 列数据是大小写混合的，但报表程序需要把所有数据按大写表示出来。 物品订单表存储物品的价格和数量，但不需要存储每个物">
+<meta name="keywords" content="MySQL,正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL(3)字段的计算、数据处理函数、聚集函数">
+<meta property="og:url" content="http://yoursite.com/2018/07/07/MySQL(3)字段的计算、数据处理函数、聚集函数/index.html">
+<meta property="og:site_name" content="晨">
+<meta property="og:description" content="字段计算存储在数据库表中的数据一般不是应用程序所需要的格式。下面举几个例子。 如果想在一个字段中既显示公司名，又显示公司的地址，但这两个信息一般包含在不同的表列中。 城市、州和邮政编码存储在不同的列中（应该这样），但邮件标签打印程序却需要把它们作为一个恰当格式的字段检索出来。 列数据是大小写混合的，但报表程序需要把所有数据按大写表示出来。 物品订单表存储物品的价格和数量，但不需要存储每个物">
+<meta property="og:locale" content="Zh-Hans">
+<meta property="og:updated_time" content="2018-07-13T19:13:35.738Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL(3)字段的计算、数据处理函数、聚集函数">
+<meta name="twitter:description" content="字段计算存储在数据库表中的数据一般不是应用程序所需要的格式。下面举几个例子。 如果想在一个字段中既显示公司名，又显示公司的地址，但这两个信息一般包含在不同的表列中。 城市、州和邮政编码存储在不同的列中（应该这样），但邮件标签打印程序却需要把它们作为一个恰当格式的字段检索出来。 列数据是大小写混合的，但报表程序需要把所有数据按大写表示出来。 物品订单表存储物品的价格和数量，但不需要存储每个物">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/07/MySQL(3)字段的计算、数据处理函数、聚集函数/"/>
+
+
+
+
+
+  <title>MySQL(3)字段的计算、数据处理函数、聚集函数 | 晨</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/07/MySQL(3)字段的计算、数据处理函数、聚集函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL(3)字段的计算、数据处理函数、聚集函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-07T18:35:40+08:00">
+                2018-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="字段计算"><a href="#字段计算" class="headerlink" title="字段计算"></a>字段计算</h1><p>存储在数据库表中的数据一般不是应用程序所需要的格式。下面举几个例子。<br> 如果想在一个字段中既显示公司名，又显示公司的地址，但这两个信息一般包含在不同的表列中。<br> 城市、州和邮政编码存储在不同的列中（应该这样），但邮件标签打印程序却需要把它们作为一个恰当格式的字段检索出来。<br> 列数据是大小写混合的，但报表程序需要把所有数据按大写表示出来。<br> 物品订单表存储物品的价格和数量，但不需要存储每个物品的总价格（用价格乘以数量即可）。为打印发票，需要物品的总价格。<br> 需要根据表数据进行总数、平均数计算或其他计算。在上述每个例子中，存储在表中的数据都不是应用程序所需要的。<br>我们需要直接从数据库中检索出转换、计算或格式化过的数据；而不是检索出数据，然后再在客户机应用程序或报告程序中重新格式化。</p>
+<p><code>字段（field）</code> 基本上与<code>列（column）</code>的意思相同，经常互换使用，不过数据库列一般称为列，而术语字段通常用在计算字段的连接上。<br>重要的是要注意到，只有数据库知道SELECT语句中哪些列是实际的表列，哪些列是计算字段。从客户机（如应用程序）的角度来看，计算字段的数据是以与其他列的数据相同的方式返回的。</p>
+<p><strong>客户机与服务器的格式</strong> 可在SQL语句内完成的许多转换和格式化工作都可以直接在客户机应用程序内完成。但一般来说，在数据库服务器上完成这些操作比在客户机中完成要快得多，因为DBMS是设计来快速有效地完成这种处理的。</p>
+<a id="more"></a>
+<h2 id="拼接字段（Concat-）"><a href="#拼接字段（Concat-）" class="headerlink" title="拼接字段（Concat()）"></a>拼接字段（<code>Concat()</code>）</h2><p>products表包含商品id(product_id)、商品名称(product_name)和商品价格(product_price)。假如要生成一个商品名称价格报表，需要在商品的名字中按照product_name(product_price)这样的格式列出商品的名称和价格。</p>
+<p>解决办法是把两个列拼接起来。在MySQL的SELECT语句中，可使用Concat()函数来拼接两个列。</p>
+<p><strong>MySQL的不同之处</strong> 多数DBMS使用+或||来实现拼接，MySQL则使用Concat()函数来实现。当把SQL语句转换成MySQL语句时一定要把这个区别铭记在心。</p>
+<p><strong><em>例:生成一个商品名称价格报表，在商品的名字中按照product_name(product_price)这样的格式列出商品的名称和价格</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT product_id,Concat(product_name,&apos;(&apos;,product_price,&apos;)&apos;)</span><br><span class="line">    -&gt; FROM products;</span><br><span class="line">+------------+--------------------------------------------+</span><br><span class="line">| product_id | Concat(product_name,&apos;(&apos;,product_price,&apos;)&apos;) |</span><br><span class="line">+------------+--------------------------------------------+</span><br><span class="line">|          1 | 可乐(3.00)                                 |</span><br><span class="line">|          2 | 绿茶(3.00)                                 |</span><br><span class="line">|          3 | 红茶(3.00)                                 |</span><br><span class="line">|          4 | 矿泉水(1.00)                               |</span><br><span class="line">|          5 | 红牛(5.00)                                 |</span><br><span class="line">|          6 | 百事可乐(3.00)                             |</span><br><span class="line">|          7 | 薯片(5.00)                                 |</span><br><span class="line">|          8 | 辣条(3.00)                                 |</span><br><span class="line">|          9 | 奶茶(5.00)                                 |</span><br><span class="line">+------------+--------------------------------------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用别名"><a href="#使用别名" class="headerlink" title="使用别名"></a>使用别名</h2><p>从前面的输出中可以看到，SELECT语句拼接地址字段工作得很好。但此新计算列的名字是什么呢？实际上它没有名字，它只是一个值。如果仅在SQL查询工具中查看一下结果，这样没有什么不好。但是，一个未命名的列不能用于客户机应用中，因为客户机没有办法引用它。为了解决这个问题，SQL支持列别名。别名（alias）是一个字段或值的替换名。</p>
+<p><strong><em>例:生成一个商品名称价格报表，在商品的名字中按照product_name(product_price)这样的格式列出商品的名称和价格,并要求商品名称价格列的列名为product_info</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT product_id,Concat(product_name,&apos;(&apos;,product_price,&apos;)&apos;) AS &quot;product_info&quot;</span><br><span class="line">    -&gt; FROM products;</span><br><span class="line">+------------+--------------------+</span><br><span class="line">| product_id | product_info       |</span><br><span class="line">+------------+--------------------+</span><br><span class="line">|          1 | 可乐(3.00)         |</span><br><span class="line">|          2 | 绿茶(3.00)         |</span><br><span class="line">|          3 | 红茶(3.00)         |</span><br><span class="line">|          4 | 矿泉水(1.00)       |</span><br><span class="line">|          5 | 红牛(5.00)         |</span><br><span class="line">|          6 | 百事可乐(3.00)     |</span><br><span class="line">|          7 | 薯片(5.00)         |</span><br><span class="line">|          8 | 辣条(3.00)         |</span><br><span class="line">|          9 | 奶茶(5.00)         |</span><br><span class="line">+------------+--------------------+</span><br><span class="line">9 rows in set (0.02 sec)</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT product_id,Concat(product_name,&apos;(&apos;,product_price,&apos;)&apos; &quot;product_info&quot;</span><br><span class="line">    -&gt; FROM products;</span><br><span class="line">+------------+--------------------+</span><br><span class="line">| product_id | product_info       |</span><br><span class="line">+------------+--------------------+</span><br><span class="line">|          1 | 可乐(3.00)         |</span><br><span class="line">|          2 | 绿茶(3.00)         |</span><br><span class="line">|          3 | 红茶(3.00)         |</span><br><span class="line">|          4 | 矿泉水(1.00)       |</span><br><span class="line">|          5 | 红牛(5.00)         |</span><br><span class="line">|          6 | 百事可乐(3.00)     |</span><br><span class="line">|          7 | 薯片(5.00)         |</span><br><span class="line">|          8 | 辣条(3.00)         |</span><br><span class="line">|          9 | 奶茶(5.00)         |</span><br><span class="line">+------------+--------------------+</span><br><span class="line">9 rows in set (0.02 sec)</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT product_id,Concat(product_name,&apos;(&apos;,product_price,&apos;)&apos;) product_info</span><br><span class="line">    -&gt; FROM products;</span><br><span class="line">+------------+--------------------+</span><br><span class="line">| product_id | product_info       |</span><br><span class="line">+------------+--------------------+</span><br><span class="line">|          1 | 可乐(3.00)         |</span><br><span class="line">|          2 | 绿茶(3.00)         |</span><br><span class="line">|          3 | 红茶(3.00)         |</span><br><span class="line">|          4 | 矿泉水(1.00)       |</span><br><span class="line">|          5 | 红牛(5.00)         |</span><br><span class="line">|          6 | 百事可乐(3.00)     |</span><br><span class="line">|          7 | 薯片(5.00)         |</span><br><span class="line">|          8 | 辣条(3.00)         |</span><br><span class="line">|          9 | 奶茶(5.00)         |</span><br><span class="line">+------------+--------------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>SELECT语句本身与以前使用的相同，只不过这里的语句中计算字段之后跟了文本AS product_info。它指示SQL创建一个包含指定计算的名为product_info的计算字段。从输出中可以看到，结果与以前的相同，但现在列名为product_info，任何客户机应用都可以按名引用这个列，就像它是一个实际的表列一样。</p>
+<p><strong>别名的其他用途</strong> 别名还有其他用途。常见的用途包括在实际的表列名包含不符合规定的字符（如空格）时重新命名它，在原来的名字含混或容易误解时扩充它，等等。</p>
+<p><strong>导出列*</strong> 别名有时也称为导出列（derived column），不管称为什么，它们所代表的都是相同的东西。</p>
+<p><strong>指定别名三种方式的区别</strong><br>使用AS “别名”和”别名”指定别名是没有差别的，在任何情况都能使用<br>直接使用 别名来指定别名，要求别名中没有特殊符号，别名不能为纯数字</p>
+<h2 id="执行算数计算"><a href="#执行算数计算" class="headerlink" title="执行算数计算"></a>执行算数计算</h2><p>计算字段的另一常见用途是对检索出的数据进行算术计算</p>
+<p><strong><em>例:列出商品的id、名称(product_name)价格(product_price)、数量(product_num)、总价值(totoalValue)</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT product_id,product_name,product_price,product_num,product_price*product_num AS totoalValue</span><br><span class="line">    -&gt; FROM products;</span><br><span class="line">+------------+--------------+---------------+-------------+-------------+</span><br><span class="line">| product_id | product_name | product_price | product_num | totoalValue |</span><br><span class="line">+------------+--------------+---------------+-------------+-------------+</span><br><span class="line">|          1 | 可乐         |          3.00 |          50 |      150.00 |</span><br><span class="line">|          2 | 绿茶         |          3.00 |          60 |      180.00 |</span><br><span class="line">|          3 | 红茶         |          3.00 |          70 |      210.00 |</span><br><span class="line">|          4 | 矿泉水       |          1.00 |          80 |       80.00 |</span><br><span class="line">|          5 | 红牛         |          5.00 |          50 |      250.00 |</span><br><span class="line">|          6 | 百事可乐     |          3.00 |         100 |      300.00 |</span><br><span class="line">|          7 | 薯片         |          5.00 |         100 |      500.00 |</span><br><span class="line">|          8 | 辣条         |          3.00 |         200 |      600.00 |</span><br><span class="line">|          9 | 奶茶         |          5.00 |         100 |      500.00 |</span><br><span class="line">+------------+--------------+---------------+-------------+-------------+</span><br><span class="line">9 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p><strong>如何测试计算</strong> SELECT提供了测试和试验函数与计算的一个很好的办法。虽然SELECT通常用来从表中检索数据，但可以省略FROM子句以便简单地访问和处理表达式。例如，SELECT 3*2;将返回6，SELECT Trim(‘abc’);将返回abc，而SELECT Now()利用Now()函数返回当前日期和时间。通过这些例子，可以明白如何根据需要使用SELECT进行试验。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT 3*2;</span><br><span class="line">+-----+</span><br><span class="line">| 3*2 |</span><br><span class="line">+-----+</span><br><span class="line">|   6 |</span><br><span class="line">+-----+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT Trim(&apos;abc&apos;);</span><br><span class="line">+-------------+</span><br><span class="line">| Trim(&apos;abc&apos;) |</span><br><span class="line">+-------------+</span><br><span class="line">| abc         |</span><br><span class="line">+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; SELECT Now();</span><br><span class="line">+---------------------+</span><br><span class="line">| Now()               |</span><br><span class="line">+---------------------+</span><br><span class="line">| 2018-07-04 13:34:07 |</span><br><span class="line">+---------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="数据处理函数"><a href="#数据处理函数" class="headerlink" title="数据处理函数"></a>数据处理函数</h1><p>本文章主要介绍什么是函数，MySQL支持何种函数，以及如何使用这些函数。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>大多数SQL实现支持以下类型的函数。<br> 用于处理文本串（如删除或填充值，转换值为大写或小写）的文本函数。<br> 用于在数值数据上进行算术操作（如返回绝对值，进行代数运算）的数值函数。<br> 用于处理日期和时间值并从这些值中提取特定成分（例如，返回两个日期之差，检查日期有效性等）的日期和时间函数。<br> 返回DBMS正使用的特殊信息（如返回用户登录信息，检查版本细节）的系统函数。</p>
+<p><strong>函数没有SQL的可移植性强</strong> 能运行在多个系统上的代码称为可移植的（portable）。相对来说，多数SQL语句是可移植的，在SQL实现之间有差异时，这些差异通常不那么难处理。而函数的可移植性却不强。几乎每种主要的DBMS的实现都支持其他实现不支持的函数，而且有时差异还很大。<br>为了代码的可移植，许多SQL程序员不赞成使用特殊实现的功能。虽然这样做很有好处，但不总是利于应用程序的性能。如果不使用这些函数，编写某些应用程序代码会很艰难。必须利用其他方法来实现DBMS非常有效地完成的工作。如果决定使用函数，应该保证做好代码注释，以便以后你（或<br>其他人）能确切地知道所编写SQL代码的含义。</p>
+<hr>
+<h2 id="文本处理函数"><a href="#文本处理函数" class="headerlink" title="文本处理函数"></a>文本处理函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">常用的文本处理函数</span><br><span class="line">    函 数 说 明</span><br><span class="line">LTrim()     去掉串左边的空格</span><br><span class="line">RTrim()     去掉串右边的空格</span><br><span class="line">Trim()      同时去掉串左右两边的空格</span><br><span class="line"></span><br><span class="line">Left()      返回串左边的字符</span><br><span class="line">Right()     返回串右边的字符</span><br><span class="line">SubString() 返回子串的字符</span><br><span class="line"></span><br><span class="line">Lower()     将串转换为小写</span><br><span class="line">Upper()     将串转换为大写</span><br><span class="line"></span><br><span class="line">Locate()    找出串的一个子串</span><br><span class="line">Length()    返回串的长度</span><br><span class="line">Soundex()   返回串的SOUNDEX值</span><br></pre></td></tr></table></figure>
+<h3 id="去除空格函数-LTrim-RTrim-Trim"><a href="#去除空格函数-LTrim-RTrim-Trim" class="headerlink" title="去除空格函数 (LTrim()/RTrim()/Trim())"></a>去除空格函数 (<code>LTrim()</code>/<code>RTrim()</code>/<code>Trim()</code>)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name,LTrim(product_name)</span><br><span class="line">FROM products</span><br></pre></td></tr></table></figure>
+<p>结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+------------+----------------------+---------------------+</span><br><span class="line">| product_id | product_name         | LTrim(product_name) |</span><br><span class="line">+------------+----------------------+---------------------+</span><br><span class="line">|          1 | 可乐                 | 可乐                |</span><br><span class="line">|          2 |            绿茶      | 绿茶                |</span><br><span class="line">|          3 | 红茶                 | 红茶                |</span><br><span class="line">|          4 |            矿泉水    | 矿泉水              |</span><br><span class="line">+------------+----------------------+---------------------+</span><br></pre></td></tr></table></figure></p>
+<h3 id="串的字符截取-Left-Right-SubString"><a href="#串的字符截取-Left-Right-SubString" class="headerlink" title="串的字符截取(Left()/Right()/SubString())"></a>串的字符截取(<code>Left()</code>/<code>Right()</code>/<code>SubString()</code>)</h3><p><strong><em>例1:截取左边8位的字符</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT LEFT(&apos;https://jiachenglai.github.io&apos;,8),Right(&apos;https://jiachenglai.github.io&apos;,9) R9;</span><br><span class="line">+-----------------------------------------+-----------+</span><br><span class="line">| LEFT(&apos;https://jiachenglai.github.io&apos;,8) | R9        |</span><br><span class="line">+-----------------------------------------+-----------+</span><br><span class="line">| https://                                | github.io |</span><br><span class="line">+-----------------------------------------+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>例2:<code>Substring(str, pos, length)</code>截取特定长度字符</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT SubString(&apos;https://jiachenglai.github.io&apos;,9,11);</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">| SubString(&apos;https://jiachenglai.github.io&apos;,9,11) |</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">| jiachenglai                                     |</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>例3:<code>substring_index(str, delim, count)</code>按关键字进行读取</em></strong><br><strong><em>截取第一个<code>.</code>之前的字串</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT SUBSTRING_INDEX(&apos;https://jiachenglai.github.io&apos;, &apos;.&apos;, 1);</span><br><span class="line">+----------------------------------------------------------+</span><br><span class="line">| SUBSTRING_INDEX(&apos;https://jiachenglai.github.io&apos;, &apos;.&apos;, 1) |</span><br><span class="line">+----------------------------------------------------------+</span><br><span class="line">| https://jiachenglai                                      |</span><br><span class="line">+----------------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>截取倒数第二个<code>.</code>之后的所有字符</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT SUBSTRING_INDEX(&apos;https://jiachenglai.github.io&apos;, &apos;.&apos;, -2);</span><br><span class="line">+-----------------------------------------------------------+</span><br><span class="line">| SUBSTRING_INDEX(&apos;https://jiachenglai.github.io&apos;, &apos;.&apos;, -2) |</span><br><span class="line">+-----------------------------------------------------------+</span><br><span class="line">| github.io                                                 |</span><br><span class="line">+-----------------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<h3 id="对串的发音进行比较-SOUNDEX"><a href="#对串的发音进行比较-SOUNDEX" class="headerlink" title="对串的发音进行比较(SOUNDEX())"></a>对串的发音进行比较(<code>SOUNDEX()</code>)</h3><p>SOUNDEX是一个将任何文本串转换为描述其语音表示的字母数字模式的算法。SOUNDEX考虑了类似的发音字符和音节，使得能对串进行发音比较而不是字母比较。虽然SOUNDEX不是SQL概念，但MySQL（就像多数DBMS一样）都提供对SOUNDEX的支持。</p>
+<p><strong><em>例：商品中有两个发音相似的商品tee和tie,筛选出他们</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_id,product_name </span><br><span class="line">From products </span><br><span class="line">WHERE Soundex(product_name)=Soundex(&apos;tie&apos;);</span><br></pre></td></tr></table></figure></p>
+<p>结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+------------+--------------+</span><br><span class="line">| product_id | product_name |</span><br><span class="line">+------------+--------------+</span><br><span class="line">|          6 | tea          |</span><br><span class="line">|          7 | tee          |</span><br><span class="line">+------------+--------------+</span><br></pre></td></tr></table></figure></p>
+<h3 id="在串中找出子串第一次出现的位置-Locate"><a href="#在串中找出子串第一次出现的位置-Locate" class="headerlink" title="在串中找出子串第一次出现的位置(Locate())"></a>在串中找出子串第一次出现的位置(<code>Locate()</code>)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT Locate(&apos;sql&apos;,&apos;mysql&apos;) location;</span><br><span class="line">+----------+</span><br><span class="line">| location |</span><br><span class="line">+----------+</span><br><span class="line">|        3 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong><em>拓展:判断site表中的url是否包含’http://‘子串,如果不包含则拼接在url字符串开头</em></strong><br>update site set url =concat(‘http://‘,url) where locate(‘http://‘,url)=0;</p>
+<h2 id="日期和时间处理函数"><a href="#日期和时间处理函数" class="headerlink" title="日期和时间处理函数"></a>日期和时间处理函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">常用日期和时间处理函数</span><br><span class="line">            函 数 说 明</span><br><span class="line">CurDate()       返回当前日期</span><br><span class="line">CurTime()       返回当前时间</span><br><span class="line">Now()           返回当前日期和时间</span><br><span class="line">Year()          返回一个日期的年份部分</span><br><span class="line">Date()          返回日期时间的日期部分</span><br><span class="line">Time()          返回一个日期时间的时间部分</span><br><span class="line">DayOfWeek()     对于一个日期，返回对应的星期几</span><br><span class="line">DateDiff()      计算两个日期之差</span><br><span class="line">Month()         返回一个日期的月份部分</span><br><span class="line">Day()           返回一个日期的天数部分</span><br><span class="line">Hour()          返回一个时间的小时部分</span><br><span class="line">Minute()        返回一个时间的分钟部分</span><br><span class="line">Second()        返回一个时间的秒部分</span><br><span class="line">Date_Add()      高度灵活的日期运算函数</span><br><span class="line">Date_Format()   返回一个格式化的日期或时间串</span><br></pre></td></tr></table></figure>
+<p><strong>注意的是MySQL使用的日期格式</strong>。无论你什么时候指定一个日期，不管是插入或更新表值还是用WHERE子句进行过滤，日期必须为格式yyyy-mm-dd。因此，2005年9月1日，给出为2005-09-01。虽然其他的日期格式可能也行，但这是首选的日期格式，因为它排除了多义性（如，04/05/06是2006年5月4日或2006年4月5日或2004年5月6日或……）。</p>
+<h3 id="返回当前日期-时间-日期-时间-CurDate-CurTime-Now"><a href="#返回当前日期-时间-日期-时间-CurDate-CurTime-Now" class="headerlink" title="返回当前日期/时间/日期+时间(CurDate()/CurTime()/Now())"></a>返回当前日期/时间/日期+时间(<code>CurDate()</code>/<code>CurTime()</code>/Now())</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT CurDate(),CurTime(),Now();</span><br><span class="line">+------------+-----------+---------------------+</span><br><span class="line">| CurDate()  | CurTime() | Now()               |</span><br><span class="line">+------------+-----------+---------------------+</span><br><span class="line">| 2018-07-09 | 14:51:40  | 2018-07-09 14:51:40 |</span><br><span class="line">+------------+-----------+---------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="返回一个日期的年份-部分-日期-时间-星期几-Year-Date-Time-DayOfWeek"><a href="#返回一个日期的年份-部分-日期-时间-星期几-Year-Date-Time-DayOfWeek" class="headerlink" title="返回一个日期的年份\部分\日期\时间\星期几(Year()`Date()\Time()\DayOfWeek()`)"></a>返回一个日期的年份\部分\日期\时间\星期几(<code>Year()</code>`Date()<code>\</code>Time()<code>\</code>DayOfWeek()`)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT Year(&apos;2008-08-08 12:12:12&apos;) year,Date(&apos;2008-08-08 12:12:12&apos;) date,Time (&apos;2008-08-08 12:12:12&apos;) time,DayofWeek(&apos;2008-08-08 12:12:12&apos;) dayofweek;</span><br><span class="line">+------+------------+----------+-----------+</span><br><span class="line">| year | date       | time     | dayofweek |</span><br><span class="line">+------+------------+----------+-----------+</span><br><span class="line">| 2008 | 2008-08-08 | 12:12:12 |         6 |</span><br><span class="line">+------+------------+----------+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="返回一个日期的月份-天数-小时-分钟-秒-Month-Day-Hour-Minute-Second"><a href="#返回一个日期的月份-天数-小时-分钟-秒-Month-Day-Hour-Minute-Second" class="headerlink" title="返回一个日期的月份\天数\小时\分钟\秒(Month()`Day()\Hour()\Minute()\Second()`)"></a>返回一个日期的月份\天数\小时\分钟\秒(<code>Month()</code>`Day()<code>\</code>Hour()<code>\</code>Minute()<code>\</code>Second()`)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT Month(&apos;2008-08-08 12:12:12&apos;) month,Day(&apos;2008-08-08 12:12:12&apos;) day,Hour (&apos;2008-08-08 12:12:12&apos;) hour,Minute(&apos;2008-08-08 12:12:12&apos;) minute,Second(&apos;2008-08-08 12:12:12&apos;) second;</span><br><span class="line">+-------+------+------+--------+--------+</span><br><span class="line">| month | day  | hour | minute | second |</span><br><span class="line">+-------+------+------+--------+--------+</span><br><span class="line">|     8 |    8 |   12 |     12 |     12 |</span><br><span class="line">+-------+------+------+--------+--------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="对日期进行灵活运算Date-Add"><a href="#对日期进行灵活运算Date-Add" class="headerlink" title="对日期进行灵活运算Date_Add()"></a>对日期进行灵活运算<code>Date_Add()</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SELECT Date_add(Now(), INTERVAL 1 DAY); - 加1天</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 HOUR); -加1小时</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 MINUTE); - 加1分钟</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 SECOND); -加1秒</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 MICROSECOND);-加1毫秒</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 WEEK);-加1周</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 MONTH);-加1月</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 QUARTER);-加1季</span><br><span class="line"></span><br><span class="line">SELECT Date_add(Now(), INTERVAL 1 YEAR);-加1年</span><br></pre></td></tr></table></figure>
+<h3 id="检索某个时间段内的项"><a href="#检索某个时间段内的项" class="headerlink" title="检索某个时间段内的项"></a>检索某个时间段内的项</h3><p><strong><em>例:检索出2005年9月下的所有订单，</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_id,order_num</span><br><span class="line">FROM orders</span><br><span class="line">WHERE Date(order_date) BETWEEN &apos;2005-09-01&apos; AND &apos;2005-09-30&apos;</span><br></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_id,order_num</span><br><span class="line">FROM orders</span><br><span class="line">WHERE Year(order_date) = 2005 AND Month(order_date) = 9</span><br></pre></td></tr></table></figure></p>
+<h2 id="数值处理函数"><a href="#数值处理函数" class="headerlink" title="数值处理函数"></a>数值处理函数</h2><p>数值处理函数仅处理数值数据。这些函数一般主要用于代数、三角或几何运算，因此没有串或日期—时间处理函数的使用那么频繁。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">常用数值处理函数</span><br><span class="line">    函 数 说 明</span><br><span class="line">Abs()   返回一个数的绝对值</span><br><span class="line">Cos()   返回一个角度的余弦</span><br><span class="line">Exp()   返回一个数的指数值</span><br><span class="line">Mod()   返回除操作的余数</span><br><span class="line">Pi()    返回圆周率</span><br><span class="line">Rand()  返回一个随机数</span><br><span class="line">Sin()   返回一个角度的正弦</span><br><span class="line">Sqrt()  返回一个数的平方根</span><br><span class="line">Tan()   返回一个角度的正切</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SELECT Abs(-3),Mod(1600,300),Pi(),Rand();</span><br><span class="line">+---------+---------------+----------+---------------------+</span><br><span class="line">| Abs(-3) | Mod(1600,300) | Pi()     | Rand()              |</span><br><span class="line">+---------+---------------+----------+---------------------+</span><br><span class="line">|       3 |           100 | 3.141593 | 0.25406336901156545 |</span><br><span class="line">+---------+---------------+----------+---------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="聚集函数"><a href="#聚集函数" class="headerlink" title="聚集函数"></a>聚集函数</h1><p>我们经常需要汇总数据而不用把它们实际检索出来，为此MySQL提供了专门的函数。使用这些函数，MySQL查询可用于检索数据，以便分析和报表生成。这种类型的检索例子有以下几种。<br> 确定表中行数（或者满足某个条件或包含某个特定值的行数）。<br> 获得表中行组的和。<br> 找出表列（或所有行或某些特定的行）的最大值、最小值和平均值。<br>上述例子都需要对表中数据（而不是实际数据本身）汇总。因此，返回实际表数据是对时间和处理资源的一种浪费（更不用说带宽了）。重复一遍，实际想要的是汇总信息。为方便这种类型的检索，MySQL给出了5个聚集函数，这些函数能进行上述罗列的检索。</p>
+<h2 id="聚集函数-1"><a href="#聚集函数-1" class="headerlink" title="聚集函数"></a>聚集函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    函 数 说 明</span><br><span class="line">AVG()   返回某列的平均值</span><br><span class="line">MAX()   返回某列的最大值</span><br><span class="line">MIN()   返回某列的最小值</span><br><span class="line">SUM()   返回某列值之和</span><br><span class="line">COUNT() 返回某列的行数</span><br></pre></td></tr></table></figure>
+<p><strong><em>例：计算出所有商品的商品价值的平均值<code>AVG()</code>、最大值<code>MAX()</code>、最小值<code>MIN()</code>、和<code>SUM()</code>、行数<code>COUNT()</code></em></strong><br><code>SELECT AVG(product_price) avg,MAX(product_price) max,MIN(product_price) min,SUM(product_price) sum,COUNT(product_price) count FROM products</code><br>结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+----------+------+------+-------+-------+</span><br><span class="line">| avg      | max  | min  | sum   | count |</span><br><span class="line">+----------+------+------+-------+-------+</span><br><span class="line">| 2.666667 | 3.00 | 1.00 | 16.00 |     6 |</span><br><span class="line">+----------+------+------+-------+-------+</span><br></pre></td></tr></table></figure></p>
+<h2 id="聚集不同值-DISTINCT"><a href="#聚集不同值-DISTINCT" class="headerlink" title="聚集不同值(DISTINCT)"></a>聚集不同值(<code>DISTINCT</code>)</h2><p><strong>MySQL 5 及后期版本</strong> 下面将要介绍的聚集函数的DISTINCT的使用，已经被添加到MySQL 5.0.3中。下面所述内容在MySQL 4.x中不能正常运行。<br><strong><em>找出商品价格不同的商品数量</em></strong><br><code>SELECT COUNT(DISTINCT product_price) count FROM products</code><br>结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+-------+</span><br><span class="line">| count |</span><br><span class="line">+-------+</span><br><span class="line">|     2 |</span><br><span class="line">+-------+</span><br></pre></td></tr></table></figure></p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>聚集函数用来汇总数据</strong>。MySQL支持一系列聚集函数，可以用多种方法使用它们以返回所需的结果。这些函数是高效设计的，它们返回结果一般比你在自己的客户机应用程序中计算要快得多。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL-正则表达式/" rel="tag"># MySQL,正则表达式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/MySQL(2)数据过滤、通配符、正则表达式/" rel="next" title="MySQL(2)数据过滤、通配符、正则表达式">
+                <i class="fa fa-chevron-left"></i> MySQL(2)数据过滤、通配符、正则表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/08/Oracle(1)入门、基本操作、过滤排序/" rel="prev" title="Oracle(1)入门、基本操作、过滤排序">
+                Oracle(1)入门、基本操作、过滤排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JiachengLai" />
+            
+              <p class="site-author-name" itemprop="name">JiachengLai</p>
+              <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，绝知此事要躬行</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字段计算"><span class="nav-number">1.</span> <span class="nav-text">字段计算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#拼接字段（Concat-）"><span class="nav-number">1.1.</span> <span class="nav-text">拼接字段（Concat()）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用别名"><span class="nav-number">1.2.</span> <span class="nav-text">使用别名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行算数计算"><span class="nav-number">1.3.</span> <span class="nav-text">执行算数计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据处理函数"><span class="nav-number">2.</span> <span class="nav-text">数据处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">2.1.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本处理函数"><span class="nav-number">2.2.</span> <span class="nav-text">文本处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#去除空格函数-LTrim-RTrim-Trim"><span class="nav-number">2.2.1.</span> <span class="nav-text">去除空格函数 (LTrim()/RTrim()/Trim())</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#串的字符截取-Left-Right-SubString"><span class="nav-number">2.2.2.</span> <span class="nav-text">串的字符截取(Left()/Right()/SubString())</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对串的发音进行比较-SOUNDEX"><span class="nav-number">2.2.3.</span> <span class="nav-text">对串的发音进行比较(SOUNDEX())</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在串中找出子串第一次出现的位置-Locate"><span class="nav-number">2.2.4.</span> <span class="nav-text">在串中找出子串第一次出现的位置(Locate())</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期和时间处理函数"><span class="nav-number">2.3.</span> <span class="nav-text">日期和时间处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#返回当前日期-时间-日期-时间-CurDate-CurTime-Now"><span class="nav-number">2.3.1.</span> <span class="nav-text">返回当前日期/时间/日期+时间(CurDate()/CurTime()/Now())</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回一个日期的年份-部分-日期-时间-星期几-Year-Date-Time-DayOfWeek"><span class="nav-number">2.3.2.</span> <span class="nav-text">返回一个日期的年份\部分\日期\时间\星期几(Year()`Date()\Time()\DayOfWeek()`)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回一个日期的月份-天数-小时-分钟-秒-Month-Day-Hour-Minute-Second"><span class="nav-number">2.3.3.</span> <span class="nav-text">返回一个日期的月份\天数\小时\分钟\秒(Month()`Day()\Hour()\Minute()\Second()`)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对日期进行灵活运算Date-Add"><span class="nav-number">2.3.4.</span> <span class="nav-text">对日期进行灵活运算Date_Add()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检索某个时间段内的项"><span class="nav-number">2.3.5.</span> <span class="nav-text">检索某个时间段内的项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值处理函数"><span class="nav-number">2.4.</span> <span class="nav-text">数值处理函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#聚集函数"><span class="nav-number">3.</span> <span class="nav-text">聚集函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#聚集函数-1"><span class="nav-number">3.1.</span> <span class="nav-text">聚集函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#聚集不同值-DISTINCT"><span class="nav-number">3.2.</span> <span class="nav-text">聚集不同值(DISTINCT)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意"><span class="nav-number">3.3.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JiachengLai</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

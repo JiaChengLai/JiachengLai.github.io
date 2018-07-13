@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="Zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Oracle," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="多表查询等值查询等值查询 一个用户查询请求涉及到多个表的时候，连接两个表的条件为=时，就是等值连接查询。123456789101112131415161718192021222324SQL&amp;gt; --查询员工信息：员工号  姓名 月薪 部门名称SQL&amp;gt; select e.empno,ename,e.sal,d.dname  2  from emp e,dept d  3  where e.">
+<meta name="keywords" content="Oracle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle(3)多表查询、子查询、集合运算">
+<meta property="og:url" content="http://yoursite.com/2018/07/10/Oracle(3)多表查询、子查询、集合运算/index.html">
+<meta property="og:site_name" content="晨">
+<meta property="og:description" content="多表查询等值查询等值查询 一个用户查询请求涉及到多个表的时候，连接两个表的条件为=时，就是等值连接查询。123456789101112131415161718192021222324SQL&amp;gt; --查询员工信息：员工号  姓名 月薪 部门名称SQL&amp;gt; select e.empno,ename,e.sal,d.dname  2  from emp e,dept d  3  where e.">
+<meta property="og:locale" content="Zh-Hans">
+<meta property="og:image" content="http://pbn1szxgn.bkt.clouddn.com/18-7-14/66883523.jpg">
+<meta property="og:image" content="http://pbn1szxgn.bkt.clouddn.com/18-7-14/31110168.jpg">
+<meta property="og:image" content="http://pbn1szxgn.bkt.clouddn.com/18-7-14/95472244.jpg">
+<meta property="og:image" content="http://pbn1szxgn.bkt.clouddn.com/18-7-14/93048656.jpg">
+<meta property="og:updated_time" content="2018-07-13T19:30:23.266Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Oracle(3)多表查询、子查询、集合运算">
+<meta name="twitter:description" content="多表查询等值查询等值查询 一个用户查询请求涉及到多个表的时候，连接两个表的条件为=时，就是等值连接查询。123456789101112131415161718192021222324SQL&amp;gt; --查询员工信息：员工号  姓名 月薪 部门名称SQL&amp;gt; select e.empno,ename,e.sal,d.dname  2  from emp e,dept d  3  where e.">
+<meta name="twitter:image" content="http://pbn1szxgn.bkt.clouddn.com/18-7-14/66883523.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/10/Oracle(3)多表查询、子查询、集合运算/"/>
+
+
+
+
+
+  <title>Oracle(3)多表查询、子查询、集合运算 | 晨</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/10/Oracle(3)多表查询、子查询、集合运算/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Oracle(3)多表查询、子查询、集合运算</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-10T18:24:46+08:00">
+                2018-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Oracle/" itemprop="url" rel="index">
+                    <span itemprop="name">Oracle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h1><h2 id="等值查询"><a href="#等值查询" class="headerlink" title="等值查询"></a>等值查询</h2><p><strong>等值查询</strong> 一个用户查询请求涉及到多个表的时候，连接两个表的条件为=时，就是等值连接查询。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --查询员工信息：员工号  姓名 月薪 部门名称</span><br><span class="line">SQL&gt; select e.empno,ename,e.sal,d.dname</span><br><span class="line">  2  from emp e,dept d</span><br><span class="line">  3  where e.deptno=d.deptno;</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME             SAL DNAME</span><br><span class="line">---------- ---------- ---------- --------------</span><br><span class="line">      1001 Tom_AB           3000 ACCOUNTING</span><br><span class="line">      7369 SMITH             800 RESEARCH</span><br><span class="line">      7499 ALLEN            1600 SALES</span><br><span class="line">      7521 WARD             1250 SALES</span><br><span class="line">      7566 JONES            2975 RESEARCH</span><br><span class="line">      7654 MARTIN           1250 SALES</span><br><span class="line">      7698 BLAKE            2850 SALES</span><br><span class="line">      7782 CLARK            2450 ACCOUNTING</span><br><span class="line">      7788 SCOTT            3000 RESEARCH</span><br><span class="line">      7839 KING             5000 ACCOUNTING</span><br><span class="line">      7844 TURNER           1500 SALES</span><br><span class="line">      7876 ADAMS            1100 RESEARCH</span><br><span class="line">      7900 JAMES             950 SALES</span><br><span class="line">      7902 FORD             3000 RESEARCH</span><br><span class="line">      7934 MILLER           1300 ACCOUNTING</span><br><span class="line"></span><br><span class="line">已选择 15 行。</span><br></pre></td></tr></table></figure></p>
+<h2 id="不等值查询"><a href="#不等值查询" class="headerlink" title="不等值查询"></a>不等值查询</h2><p><strong>不等值查询</strong> 一个用户查询请求涉及到多个表的时候，连接两个表的条件不为=时，就是不等值连接查询。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select e.empno,e.ename,e.sal,s.grade</span><br><span class="line">  2  from emp e,salgrade s</span><br><span class="line">  3  where e.sal between s.losal  and s.hisal;</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME             SAL      GRADE</span><br><span class="line">---------- ---------- ---------- ----------</span><br><span class="line">      7369 SMITH             800          1</span><br><span class="line">      7900 JAMES             950          1</span><br><span class="line">      7876 ADAMS            1100          1</span><br><span class="line">      7521 WARD             1250          2</span><br><span class="line">      7654 MARTIN           1250          2</span><br><span class="line">      7934 MILLER           1300          2</span><br><span class="line">      7844 TURNER           1500          3</span><br><span class="line">      7499 ALLEN            1600          3</span><br><span class="line">      7782 CLARK            2450          4</span><br><span class="line">      7698 BLAKE            2850          4</span><br><span class="line">      7566 JONES            2975          4</span><br><span class="line">      1001 Tom_AB           3000          4</span><br><span class="line">      7902 FORD             3000          4</span><br><span class="line">      7788 SCOTT            3000          4</span><br><span class="line">      7839 KING             5000          5</span><br><span class="line"></span><br><span class="line">已选择 15 行。</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="外连接"><a href="#外连接" class="headerlink" title="外连接"></a>外连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --按部门统计员工信息：部门号 部门名称  人数</span><br><span class="line">SQL&gt; select d.deptno 部门号,d.dname 部门名称,count(e.empno) 人数</span><br><span class="line">  2  from emp e,dept d</span><br><span class="line">  3  where e.deptno=d.deptno</span><br><span class="line">  4  group by d.deptno,d.dname;</span><br><span class="line"></span><br><span class="line">    部门号 部门名称             人数                                            </span><br><span class="line">---------- -------------- ----------                                            </span><br><span class="line">        10 ACCOUNTING              3                                            </span><br><span class="line">        20 RESEARCH                5                                            </span><br><span class="line">        30 SALES                   6                                            </span><br><span class="line"></span><br><span class="line">SQL&gt; --发现上面结果错误，少了&apos;OPERATIONS&apos;部门</span><br><span class="line">SQL&gt; --因为&apos;OPERATIONS&apos;部门没有员工 所以左边条件不成立 为空 所以整行都不显示</span><br><span class="line">SQL&gt; select * from dept;</span><br><span class="line"></span><br><span class="line">    DEPTNO DNAME          LOC                                                   </span><br><span class="line">---------- -------------- -------------                                         </span><br><span class="line">        10 ACCOUNTING     NEW YORK                                              </span><br><span class="line">        20 RESEARCH       DALLAS                                                </span><br><span class="line">        30 SALES          CHICAGO                                               </span><br><span class="line">        40 OPERATIONS     BOSTON                                                </span><br><span class="line"></span><br><span class="line">SQL&gt; select * from emp where deptno=40;</span><br><span class="line"></span><br><span class="line">未选定行</span><br><span class="line"></span><br><span class="line">SQL&gt; /*</span><br><span class="line">SQL&gt; 希望把某些不成立的记录（40号部门），任然包含在最后的结果中 ---&gt; 外连接</span><br><span class="line">SQL&gt; 左外连接: 当where e.deptno=d.deptno不成立的时候，等号左边的表任然被包含在最后的结果中</span><br><span class="line">SQL&gt;     写法:where e.deptno=d.deptno(+)</span><br><span class="line">SQL&gt; 右外连接: 当where e.deptno=d.deptno不成立的时候，等号右边的表任然被包含在最后的结果中</span><br><span class="line">SQL&gt;     写法:where e.deptno(+)=d.deptno</span><br><span class="line">SQL&gt; */</span><br><span class="line">SQL&gt; select d.deptno 部门号,d.dname 部门名称,count(e.empno) 人数</span><br><span class="line">  2  from emp e,dept d</span><br><span class="line">  3  where e.deptno(+)=d.deptno</span><br><span class="line">  4  group by d.deptno,d.dname;</span><br><span class="line"></span><br><span class="line">    部门号 部门名称             人数                                            </span><br><span class="line">---------- -------------- ----------                                            </span><br><span class="line">        10 ACCOUNTING              3                                            </span><br><span class="line">        40 OPERATIONS              0                                            </span><br><span class="line">        20 RESEARCH                5                                            </span><br><span class="line">        30 SALES                   6</span><br></pre></td></tr></table></figure>
+<h2 id="自连接"><a href="#自连接" class="headerlink" title="自连接"></a>自连接</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt;  --自连接: 通过表的别名，将同一张表视为多张表</span><br><span class="line">SQL&gt; select e.ename 员工姓名,b.ename 老板姓名</span><br><span class="line">  2  from emp e,emp b</span><br><span class="line">  3  where e.mgr=b.empno;</span><br><span class="line"></span><br><span class="line">员工姓名   老板姓名</span><br><span class="line">---------- ----------</span><br><span class="line">SMITH      FORD</span><br><span class="line">ALLEN      BLAKE</span><br><span class="line">WARD       BLAKE</span><br><span class="line">JONES      KING</span><br><span class="line">MARTIN     BLAKE</span><br><span class="line">BLAKE      KING</span><br><span class="line">CLARK      KING</span><br><span class="line">SCOTT      JONES</span><br><span class="line">TURNER     BLAKE</span><br><span class="line">ADAMS      SCOTT</span><br><span class="line">JAMES      BLAKE</span><br><span class="line">FORD       JONES</span><br><span class="line">MILLER     CLARK</span><br><span class="line"></span><br><span class="line">已选择 13 行。</span><br><span class="line"></span><br><span class="line">SQL&gt; select count(*)</span><br><span class="line">  2  from emp e,emp b;</span><br><span class="line"></span><br><span class="line">  COUNT(*)</span><br><span class="line">----------</span><br><span class="line">       225</span><br><span class="line"></span><br><span class="line">SQL&gt; --可以发现自连接时，自连接数据条数为单表数据条数的平方</span><br><span class="line">SQL&gt; --若单表数据有一亿条，自连接操作时操作的数据就有一亿的平方条</span><br><span class="line">SQL&gt; --得出结论：自连接不适合大表</span><br></pre></td></tr></table></figure>
+<h2 id="层次查询"><a href="#层次查询" class="headerlink" title="层次查询"></a>层次查询</h2><p>!()[层次查询.png]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">select empno,ename,mgr</span><br><span class="line">from emp</span><br><span class="line">connect by 上一次员工=这一层员工的老板</span><br><span class="line">start with 起始条件</span><br><span class="line">通过从根节点遍历树来替代自连接</span><br><span class="line"></span><br><span class="line">SQL&gt; select empno,ename,mgr</span><br><span class="line">  2  from emp</span><br><span class="line">  3  connect by prior empno=mgr</span><br><span class="line">  4  start with mgr is null;</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME             MGR</span><br><span class="line">---------- ---------- ----------</span><br><span class="line">      1001 Tom_AB</span><br><span class="line">      7839 KING</span><br><span class="line">      7566 JONES            7839</span><br><span class="line">      7788 SCOTT            7566</span><br><span class="line">      7876 ADAMS            7788</span><br><span class="line">      7902 FORD             7566</span><br><span class="line">      7369 SMITH            7902</span><br><span class="line">      7698 BLAKE            7839</span><br><span class="line">      7499 ALLEN            7698</span><br><span class="line">      7521 WARD             7698</span><br><span class="line">      7654 MARTIN           7698</span><br><span class="line">      7844 TURNER           7698</span><br><span class="line">      7900 JAMES            7698</span><br><span class="line">      7782 CLARK            7839</span><br><span class="line">      7934 MILLER           7782</span><br><span class="line"></span><br><span class="line">已选择 15 行。</span><br><span class="line"></span><br><span class="line">SQL&gt; --level Oracle中关键字 表树的深度 伪列 表中不存在的列 </span><br><span class="line">SQL&gt; --由oracle提供 要得到伪列，使用时必须在查询语句中写出</span><br><span class="line">SQL&gt; select level,empno,ename,mgr</span><br><span class="line">  2  from emp</span><br><span class="line">  3  connect by prior empno=mgr</span><br><span class="line">  4  start with mgr is null</span><br><span class="line">  5  order by 1;</span><br><span class="line"></span><br><span class="line">     LEVEL      EMPNO ENAME             MGR</span><br><span class="line">---------- ---------- ---------- ----------</span><br><span class="line">         1       1001 Tom_AB</span><br><span class="line">         1       7839 KING</span><br><span class="line">         2       7566 JONES            7839</span><br><span class="line">         2       7698 BLAKE            7839</span><br><span class="line">         2       7782 CLARK            7839</span><br><span class="line">         3       7902 FORD             7566</span><br><span class="line">         3       7521 WARD             7698</span><br><span class="line">         3       7900 JAMES            7698</span><br><span class="line">         3       7934 MILLER           7782</span><br><span class="line">         3       7499 ALLEN            7698</span><br><span class="line">         3       7788 SCOTT            7566</span><br><span class="line">         3       7654 MARTIN           7698</span><br><span class="line">         3       7844 TURNER           7698</span><br><span class="line">         4       7876 ADAMS            7788</span><br><span class="line">         4       7369 SMITH            7902</span><br><span class="line"></span><br><span class="line">已选择 15 行。</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h1><h2 id="子查询所应用的场景"><a href="#子查询所应用的场景" class="headerlink" title="子查询所应用的场景"></a>子查询所应用的场景</h2><p><strong>子查询所应用的场景:</strong> 不能一步解决的问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --查询员工中薪水大于SOCTT的所有员工</span><br><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal&gt;(select sal</span><br><span class="line">  4             from emp</span><br><span class="line">  5             where ename=&apos;SCOTT&apos;);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line"></span><br><span class="line">SQL&gt; --以上的语句就是子查询</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用子查询的注意事项"><a href="#使用子查询的注意事项" class="headerlink" title="使用子查询的注意事项"></a>使用子查询的注意事项</h2><p>1、括号<br>2、合理的书写风格<br>3、不可以在group by使用子查询<br>4、一般先执行子查询，再执行主查询；但相关子查询例外<br>5、一般不在子查询中排序；但在top-n分析问题中 必须对子查询排序<br>6、子查询中的数据为null,则不能使用not in<br>7、可以在主查询的where select having  from 后面使用子查询<br>8、主查询和子查询可以不是同一张表；只要子查询返回的结果 主查询可以使用 即可<br>9、单行子查询只能使用单行操作符；多行子查询只能使用多行操作符</p>
+<h2 id="在主查询的where、select、having、from后使用子查询"><a href="#在主查询的where、select、having、from后使用子查询" class="headerlink" title="在主查询的where、select、having、from后使用子查询"></a>在主查询的<code>where</code>、<code>select</code>、<code>having</code>、<code>from</code>后使用子查询</h2><h3 id="where后使用子查询"><a href="#where后使用子查询" class="headerlink" title="where后使用子查询"></a><code>where</code>后使用子查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --查询工作和id为7566的员工相同的所有员工</span><br><span class="line">SQL&gt; select empno,ename,sal,job</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where job=(select job</span><br><span class="line">  4             from emp</span><br><span class="line">  5             where empno=7566);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME             SAL JOB</span><br><span class="line">---------- ---------- ---------- ---------</span><br><span class="line">      7566 JONES            2975 MANAGER</span><br><span class="line">      7698 BLAKE            2850 MANAGER</span><br><span class="line">      7782 CLARK            2450 MANAGER</span><br></pre></td></tr></table></figure>
+<h3 id="select后使用子查询"><a href="#select后使用子查询" class="headerlink" title="select后使用子查询"></a><code>select</code>后使用子查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --查询id位7839员工的工作</span><br><span class="line">SQL&gt; select (select job from emp where empno=7839) &quot;7839&apos;sJob&quot;</span><br><span class="line">  2  from dual;</span><br><span class="line"></span><br><span class="line">7839&apos;sJob</span><br><span class="line">---------</span><br><span class="line">PRESIDENT</span><br></pre></td></tr></table></figure>
+<h3 id="having后使用子查询"><a href="#having后使用子查询" class="headerlink" title="having后使用子查询"></a><code>having</code>后使用子查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --筛选出平均工资大于 id为30部门 的部门</span><br><span class="line">SQL&gt; select deptno,avg(sal)</span><br><span class="line">  2  from emp</span><br><span class="line">  3  group by deptno</span><br><span class="line">  4  having avg(sal)&gt; (select avg(sal)</span><br><span class="line">  5                    from emp</span><br><span class="line">  6                    where deptno=30</span><br><span class="line">  7                    group by deptno)</span><br><span class="line"></span><br><span class="line">    DEPTNO   AVG(SAL)</span><br><span class="line">---------- ----------</span><br><span class="line">        20       2175</span><br><span class="line">        10     2937.5</span><br><span class="line"></span><br><span class="line">已选择 2 行。</span><br></pre></td></tr></table></figure>
+<h3 id="from后使用子查询"><a href="#from后使用子查询" class="headerlink" title="from后使用子查询"></a><code>from</code>后使用子查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select *</span><br><span class="line">  2  from (select empno,ename,sal</span><br><span class="line">  3        from emp</span><br><span class="line">  4        order by sal desc);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME             SAL</span><br><span class="line">---------- ---------- ----------</span><br><span class="line">      7839 KING             5000</span><br><span class="line">      1001 Tom_AB           3000</span><br><span class="line">      7902 FORD             3000</span><br><span class="line">      7788 SCOTT            3000</span><br><span class="line">      7566 JONES            2975</span><br><span class="line">      7698 BLAKE            2850</span><br><span class="line">      7782 CLARK            2450</span><br><span class="line">      7499 ALLEN            1600</span><br><span class="line">      7844 TURNER           1500</span><br><span class="line">      7934 MILLER           1300</span><br><span class="line">      7521 WARD             1250</span><br><span class="line">      7654 MARTIN           1250</span><br><span class="line">      7876 ADAMS            1100</span><br><span class="line">      7900 JAMES             950</span><br><span class="line">      7369 SMITH             800</span><br><span class="line"></span><br><span class="line">已选择 15 行。</span><br></pre></td></tr></table></figure>
+<h2 id="主查询和子查询使用两张不同表查询"><a href="#主查询和子查询使用两张不同表查询" class="headerlink" title="主查询和子查询使用两张不同表查询"></a>主查询和子查询使用两张不同表查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where deptno=(select deptno</span><br><span class="line">  4                from dept</span><br><span class="line">  5                where dname=&apos;SALES&apos;);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br><span class="line">      7521 WARD       SALESMAN        7698 22-2月 -81           1250        500         30</span><br><span class="line">      7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">      7698 BLAKE      MANAGER         7839 01-5月 -81           2850                    30</span><br><span class="line">      7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">      7900 JAMES      CLERK           7698 03-12月-81            950                    30</span><br><span class="line"></span><br><span class="line">已选择 6 行。</span><br><span class="line"></span><br><span class="line">SQL&gt; --以上语句也可以用多表查询实现</span><br><span class="line">SQL&gt; select e.empno,e.ename,e.job,e.mgr,e.hiredate,e.sal,e.comm,e.deptno</span><br><span class="line">  2  from emp e,dept d</span><br><span class="line">  3  where e.deptno=d.deptno and d.dname=&apos;SALES&apos;;</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br><span class="line">      7521 WARD       SALESMAN        7698 22-2月 -81           1250        500         30</span><br><span class="line">      7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">      7698 BLAKE      MANAGER         7839 01-5月 -81           2850                    30</span><br><span class="line">      7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">      7900 JAMES      CLERK           7698 03-12月-81            950                    30</span><br><span class="line"></span><br><span class="line">已选择 6 行。</span><br><span class="line"></span><br><span class="line">&gt;SQL --我们应该尽量使用多表查询来实现，而非使用第一种方法</span><br><span class="line">&gt;SQL --因为 Oracle会将第一种方法转化成第二种方法来查询数据</span><br></pre></td></tr></table></figure>
+<h2 id="单行子查询"><a href="#单行子查询" class="headerlink" title="单行子查询"></a>单行子查询</h2><p><strong>单行子查询：</strong> 子查询只返回单条值<br><strong>单行操作符:</strong></p>
+<p><img src="http://pbn1szxgn.bkt.clouddn.com/18-7-14/66883523.jpg" alt=""><br><strong>单行子查询只能使用单行操作符</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal&gt;=(select avg(sal)</span><br><span class="line">  4              from emp);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      1001 Tom_AB                                               3000                    10</span><br><span class="line">      7566 JONES      MANAGER         7839 02-4月 -81           2975                    20</span><br><span class="line">      7698 BLAKE      MANAGER         7839 01-5月 -81           2850                    30</span><br><span class="line">      7782 CLARK      MANAGER         7839 09-6月 -81           2450                    10</span><br><span class="line">      7788 SCOTT      ANALYST         7566 19-4月 -87           3000                    20</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line">      7902 FORD       ANALYST         7566 03-12月-81           3000                    20</span><br><span class="line"></span><br><span class="line">已选择 7 行。</span><br></pre></td></tr></table></figure></p>
+<h2 id="多行子查询"><a href="#多行子查询" class="headerlink" title="多行子查询"></a>多行子查询</h2><p><strong>多行子查询：</strong> 子查询返回多条值<br><strong>多行操作符:</strong></p>
+<p><img src="http://pbn1szxgn.bkt.clouddn.com/18-7-14/31110168.jpg" alt=""><br><strong>多行子查询只能使用多行操作符</strong></p>
+<h3 id="in在集合中"><a href="#in在集合中" class="headerlink" title="in在集合中"></a><code>in</code>在集合中</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --查询部门名称是SALES和ACCOUNTING的员工</span><br><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where deptno in(select deptno</span><br><span class="line">  4                  from dept</span><br><span class="line">  5                  where dname=&apos;SALES&apos; or dname=&apos;ACCOUNTING&apos;);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br><span class="line">      7521 WARD       SALESMAN        7698 22-2月 -81           1250        500         30</span><br><span class="line">      7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">      7698 BLAKE      MANAGER         7839 01-5月 -81           2850                    30</span><br><span class="line">      7782 CLARK      MANAGER         7839 09-6月 -81           2450                    10</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line">      7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">      7900 JAMES      CLERK           7698 03-12月-81            950                    30</span><br><span class="line">      7934 MILLER     CLERK           7782 23-1月 -82           1300                    10</span><br><span class="line"></span><br><span class="line">已选择 9 行。</span><br></pre></td></tr></table></figure>
+<h3 id="any和集合中的任意一个值比较"><a href="#any和集合中的任意一个值比较" class="headerlink" title="any和集合中的任意一个值比较"></a><code>any</code>和集合中的任意一个值比较</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --查询工资比30号部门任意一个员工高的员工信息</span><br><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal&gt; any(select sal</span><br><span class="line">  4                 from emp</span><br><span class="line">  5                 where deptno=30);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line">      7902 FORD       ANALYST         7566 03-12月-81           3000                    20</span><br><span class="line">      7788 SCOTT      ANALYST         7566 19-4月 -87           3000                    20</span><br><span class="line">      7566 JONES      MANAGER         7839 02-4月 -81           2975                    20</span><br><span class="line">      7698 BLAKE      MANAGER         7839 01-5月 -81           2850                    30</span><br><span class="line">      7782 CLARK      MANAGER         7839 09-6月 -81           2450                    10</span><br><span class="line">      7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br><span class="line">      7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">      7934 MILLER     CLERK           7782 23-1月 -82           1300                    10</span><br><span class="line">      7521 WARD       SALESMAN        7698 22-2月 -81           1250        500         30</span><br><span class="line">      7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">      7876 ADAMS      CLERK           7788 23-5月 -87           1100                    20</span><br><span class="line"></span><br><span class="line">已选择 12 行。</span><br><span class="line"></span><br><span class="line">SQL&gt; --以上语句等同于</span><br><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal&gt;(select min(sal)</span><br><span class="line">  4             from emp</span><br><span class="line">  5             where deptno=30);</span><br><span class="line">  </span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br><span class="line">      7521 WARD       SALESMAN        7698 22-2月 -81           1250        500         30</span><br><span class="line">      7566 JONES      MANAGER         7839 02-4月 -81           2975                    20</span><br><span class="line">      7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">      7698 BLAKE      MANAGER         7839 01-5月 -81           2850                    30</span><br><span class="line">      7782 CLARK      MANAGER         7839 09-6月 -81           2450                    10</span><br><span class="line">      7788 SCOTT      ANALYST         7566 19-4月 -87           3000                    20</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line">      7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">      7876 ADAMS      CLERK           7788 23-5月 -87           1100                    20</span><br><span class="line">      7902 FORD       ANALYST         7566 03-12月-81           3000                    20</span><br><span class="line">      7934 MILLER     CLERK           7782 23-1月 -82           1300                    10</span><br><span class="line"></span><br><span class="line">已选择 12 行。</span><br></pre></td></tr></table></figure>
+<h3 id="all和集合中的所有值比较"><a href="#all和集合中的所有值比较" class="headerlink" title="all和集合中的所有值比较"></a><code>all</code>和集合中的所有值比较</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --查询工资比30号部门所有员工高的员工信息</span><br><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal &gt; all (select sal from emp where deptno=30);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7566 JONES      MANAGER         7839 02-4月 -81           2975                    20</span><br><span class="line">      7788 SCOTT      ANALYST         7566 19-4月 -87           3000                    20</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line">      7902 FORD       ANALYST         7566 03-12月-81           3000                    20</span><br><span class="line"></span><br><span class="line">SQL&gt; --以上语句等同于</span><br><span class="line">SQL&gt; select *</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal &gt; (select max(sal)</span><br><span class="line">  4               from emp</span><br><span class="line">  5               where deptno=30);</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7566 JONES      MANAGER         7839 02-4月 -81           2975                    20</span><br><span class="line">      7788 SCOTT      ANALYST         7566 19-4月 -87           3000                    20</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line">      7902 FORD       ANALYST         7566 03-12月-81           3000                    20</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h1><p><strong><em>1.</em>找到员工表中工资最高的前三名</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; /*</span><br><span class="line">SQL&gt; 关于rownum</span><br><span class="line">SQL&gt; rownum来说它是oracle系统顺序分配为从查询返回的行的编号，返回的第一行分配的是1，</span><br><span class="line">SQL&gt; 第二行是2，依此类推，这个伪字段可以用于限制查询返回的总行数，而且rownum不能以</span><br><span class="line">SQL&gt; 任何表的名称作为前缀。 </span><br><span class="line">SQL&gt; 1、rownum永远按照默认的顺序生成</span><br><span class="line">SQL&gt; 2、rownum只能使用&lt; &lt;=；不能使用&gt; &gt;=</span><br><span class="line">SQL&gt; */</span><br><span class="line">SQL&gt; select rownum,empno,ename,sal</span><br><span class="line">  2  from (select rownum,empno,ename,sal from emp order by sal desc)</span><br><span class="line">  3  where rownum&lt;=3;</span><br><span class="line"></span><br><span class="line">    ROWNUM      EMPNO ENAME             SAL</span><br><span class="line">---------- ---------- ---------- ----------</span><br><span class="line">         1       7839 KING             5000</span><br><span class="line">         2       7788 SCOTT            3000</span><br><span class="line">         3       7902 FORD             3000</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>2.筛选出员工表中薪水排行中的第5-8名员工(Oracle的分页问题)</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select rownum,empno,ename,sal from emp</span><br><span class="line">  2  where  rownum&gt;=5 and rownum&lt;=8;</span><br><span class="line"></span><br><span class="line">未选定行</span><br><span class="line"></span><br><span class="line">SQL&gt; --rownum 永远从1开始</span><br><span class="line">SQL&gt; select rownum,empno,ename,sal from emp</span><br><span class="line">  2  where  rownum&gt;=5;</span><br><span class="line"></span><br><span class="line">未选定行</span><br><span class="line"></span><br><span class="line">SQL&gt; --先筛选出前8名</span><br><span class="line">SQL&gt; select rownum,* from emp order bysal;</span><br><span class="line">select rownum,* from emp order bysal</span><br><span class="line">              *</span><br><span class="line">第 1 行出现错误:</span><br><span class="line">ORA-00936: 缺失表达式</span><br><span class="line">SQL&gt; --可以发现不能直接这么写</span><br><span class="line">SQL&gt; --转变写法</span><br><span class="line">SQL&gt; select rownum,r.*  from (select * from emp order by sal) r;</span><br><span class="line"></span><br><span class="line">    ROWNUM      EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">         1       7369 SMITH      CLERK           7902 17-12月-80            800                    20</span><br><span class="line">         2       7900 JAMES      CLERK           7698 03-12月-81            950                    30</span><br><span class="line">         3       7876 ADAMS      CLERK           7788 23-5月 -87           1100                    20</span><br><span class="line">         4       7521 WARD       SALESMAN        7698 22-2月 -81           1250        500         30</span><br><span class="line">         5       7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">         6       7934 MILLER     CLERK           7782 23-1月 -82           1300                    10</span><br><span class="line">         7       7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">         8       7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br><span class="line">         9       7782 CLARK      MANAGER         7839 09-6月 -81           2450                    10</span><br><span class="line">        10       7698 BLAKE      MANAGER         7839 01-5月 -81           2850                    30</span><br><span class="line">        11       7566 JONES      MANAGER         7839 02-4月 -81           2975                    20</span><br><span class="line">        12       7788 SCOTT      ANALYST         7566 19-4月 -87           3000                    20</span><br><span class="line">        13       7902 FORD       ANALYST         7566 03-12月-81           3000                    20</span><br><span class="line">        14       7839 KING       PRESIDENT            17-11月-81           5000                    10</span><br><span class="line"></span><br><span class="line">已选择 14 行。</span><br><span class="line"></span><br><span class="line">SQL&gt; --筛选出前8位</span><br><span class="line">SQL&gt; select rownum r,e1.*</span><br><span class="line">  2  from (select * from emp order by sal) e1</span><br><span class="line">  3  where rownum&lt;=8;</span><br><span class="line"></span><br><span class="line">         R      EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">         1       7369 SMITH      CLERK           7902 17-12月-80            800                    20</span><br><span class="line">         2       7900 JAMES      CLERK           7698 03-12月-81            950                    30</span><br><span class="line">         3       7876 ADAMS      CLERK           7788 23-5月 -87           1100                    20</span><br><span class="line">         4       7521 WARD       SALESMAN        7698 22-2月 -81           1250        500         30</span><br><span class="line">         5       7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">         6       7934 MILLER     CLERK           7782 23-1月 -82           1300                    10</span><br><span class="line">         7       7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">         8       7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br><span class="line"></span><br><span class="line">已选择 8 行。</span><br><span class="line"></span><br><span class="line">SQL&gt; --因为rownum永远从1开始 所以要取得rownum第5位以后的员工 需要将上述语句作为子查询</span><br><span class="line">SQL&gt; select *</span><br><span class="line">  2  from (select rownum r,e1.*</span><br><span class="line">  3        from (select * from emp order by sal) e1</span><br><span class="line">  4        where rownum&lt;=8</span><br><span class="line">  5  )</span><br><span class="line">  6  where r&gt;=5;</span><br><span class="line"></span><br><span class="line">         R      EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">         5       7654 MARTIN     SALESMAN        7698 28-9月 -81           1250       1400         30</span><br><span class="line">         6       7934 MILLER     CLERK           7782 23-1月 -82           1300                    10</span><br><span class="line">         7       7844 TURNER     SALESMAN        7698 08-9月 -81           1500          0         30</span><br><span class="line">         8       7499 ALLEN      SALESMAN        7698 20-2月 -81           1600        300         30</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>3.统计1980,1981，1982，1987年入职员工个数</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select count(*) total,sum(decode(to_char(hiredate,&apos;yyyy&apos;),&apos;1980&apos;,1,0)) &quot;1980&quot;,</span><br><span class="line">  2  sum(decode(to_char(hiredate,&apos;yyyy&apos;),&apos;1981&apos;,1,0)) &quot;1981&quot;,</span><br><span class="line">  3  sum(decode(to_char(hiredate,&apos;yyyy&apos;),&apos;1982&apos;,1,0)) &quot;1982&quot;,</span><br><span class="line">  4  sum(decode(to_char(hiredate,&apos;yyyy&apos;),&apos;1987&apos;,1,0)) &quot;1987&quot;</span><br><span class="line">  5  from emp;</span><br><span class="line"></span><br><span class="line">     TOTAL       1980       1981       1982       1987</span><br><span class="line">---------- ---------- ---------- ---------- ----------</span><br><span class="line">        14          1         10          1          2</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>4.找到员工表中薪水大于本部门平均薪水的员工</em></strong><br><strong>解法一：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select e.empno,e.ename,e.sal,d.avgsal</span><br><span class="line">  2  from emp e,(select deptno,avg(sal) avgsal from emp group by deptno) d</span><br><span class="line">  3  where e.deptno=d.deptno and e.sal&gt;d.avgsal;</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME             SAL        AVG</span><br><span class="line">---------- ---------- ---------- ----------</span><br><span class="line">      7499 ALLEN            1600 1566.66667</span><br><span class="line">      7566 JONES            2975       2175</span><br><span class="line">      7698 BLAKE            2850 1566.66667</span><br><span class="line">      7788 SCOTT            3000       2175</span><br><span class="line">      7839 KING             5000 2916.66667</span><br><span class="line">      7902 FORD             3000       2175</span><br><span class="line"></span><br><span class="line">已选择 6 行。</span><br></pre></td></tr></table></figure></p>
+<p><strong>解法二：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --相关子查询： 将主查询中的值 作为参数传递给子查询</span><br><span class="line">SQL&gt; select empno,ename,sal,(select avg(sal) from emp where deptno=e.deptno) avgsal</span><br><span class="line">  2  from emp e</span><br><span class="line">  3  where sal &gt; (select avg(sal) from emp where deptno=e.deptno);</span><br><span class="line"></span><br><span class="line">       EMPNO ENAME             SAL        avg</span><br><span class="line">---------- ---------- ---------- ----------</span><br><span class="line">      7499 ALLEN            1600 1566.66667</span><br><span class="line">      7566 JONES            2975       2175</span><br><span class="line">      7698 BLAKE            2850 1566.66667</span><br><span class="line">      7788 SCOTT            3000       2175</span><br><span class="line">      7839 KING             5000 2916.66667</span><br><span class="line">      7902 FORD             3000       2175</span><br><span class="line"></span><br><span class="line">已选择 6 行。</span><br></pre></td></tr></table></figure></p>
+<p><strong><em>5.面试题1</em></strong></p>
+<p><img src="http://pbn1szxgn.bkt.clouddn.com/18-7-14/95472244.jpg" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select id,name,money,(select money from test1 where id+1=t.id) money1</span><br><span class="line">  2  from test1 t;</span><br><span class="line"></span><br><span class="line">        ID NAME                      MONEY     MONEY1</span><br><span class="line">---------- -------------------- ---------- ----------</span><br><span class="line">         1 Tom                        1000</span><br><span class="line">         2 Mary                       2000       1000</span><br><span class="line">         3 Mike                       3000       2000</span><br><span class="line">         4 Jeff                       4000       3000</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h1><p><img src="http://pbn1szxgn.bkt.clouddn.com/18-7-14/93048656.jpg" alt=""></p>
+<h2 id="集合运算注视事项"><a href="#集合运算注视事项" class="headerlink" title="集合运算注视事项"></a>集合运算注视事项</h2><p><strong>集合运算注视事项</strong><br>1、参与运算的各个集合必须列数相同 且类型一致<br>2、采用第一个集合作为最后的表头<br>3、order by永远在最后</p>
+<h2 id="并集并去重union"><a href="#并集并去重union" class="headerlink" title="并集并去重union"></a>并集并去重<code>union</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from emp where deptno=10</span><br><span class="line">  2  union</span><br><span class="line">  3  select * from emp where deptno=10;</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7782 CLARK      MANAGER         7839 09-6月 -81           2450                    10</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000</span><br><span class="line">      7934 MILLER     CLERK           7782 23-1月 -82           1300</span><br></pre></td></tr></table></figure>
+<p><strong>用<code>union</code>达到<code>rollup</code>的效果</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select deptno,job,sum(sal)</span><br><span class="line">  2  from emp</span><br><span class="line">  3  group by rollup(deptno,job);</span><br><span class="line"></span><br><span class="line">    DEPTNO JOB         SUM(SAL)</span><br><span class="line">---------- --------- ----------</span><br><span class="line">        10 CLERK           1300</span><br><span class="line">           MANAGER         2450</span><br><span class="line">           PRESIDENT       5000</span><br><span class="line">                           8750</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        20 CLERK           1900</span><br><span class="line">           ANALYST         6000</span><br><span class="line">           MANAGER         2975</span><br><span class="line">                          10875</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        30 CLERK            950</span><br><span class="line">           MANAGER         2850</span><br><span class="line">           SALESMAN        5600</span><br><span class="line">                           9400</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    DEPTNO JOB         SUM(SAL)</span><br><span class="line">---------- --------- ----------</span><br><span class="line"></span><br><span class="line">                          29025</span><br><span class="line"></span><br><span class="line">SQL&gt; --用union实现以上效果</span><br><span class="line">SQL&gt; select deptno,job,sum(sal) from emp group by deptno,job</span><br><span class="line">  2  union</span><br><span class="line">  3  select deptno,to_char(null),sum(sal) from emp group by deptno</span><br><span class="line">  4  union</span><br><span class="line">  5  select to_number(null),to_char(null),sum(sal) from emp;</span><br><span class="line"></span><br><span class="line">    DEPTNO JOB         SUM(SAL)</span><br><span class="line">---------- --------- ----------</span><br><span class="line">        10 CLERK           1300</span><br><span class="line">           MANAGER         2450</span><br><span class="line">           PRESIDENT       5000</span><br><span class="line">                           8750</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        20 ANALYST         6000</span><br><span class="line">           CLERK           1900</span><br><span class="line">           MANAGER         2975</span><br><span class="line">                          10875</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        30 CLERK            950</span><br><span class="line">           MANAGER         2850</span><br><span class="line">           SALESMAN        5600</span><br><span class="line">                           9400</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    DEPTNO JOB         SUM(SAL)</span><br><span class="line">---------- --------- ----------</span><br><span class="line"></span><br><span class="line">                          29025</span><br><span class="line"></span><br><span class="line">已选择 13 行。</span><br></pre></td></tr></table></figure></p>
+<h2 id="并集不去重union-all"><a href="#并集不去重union-all" class="headerlink" title="并集不去重union all"></a>并集不去重<code>union all</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from emp where deptno=10</span><br><span class="line">  2  union all</span><br><span class="line">  3  select * from emp where deptno=10;</span><br><span class="line"></span><br><span class="line">     EMPNO ENAME      JOB              MGR HIREDATE              SAL       COMM     DEPTNO</span><br><span class="line">---------- ---------- --------- ---------- -------------- ---------- ---------- ----------</span><br><span class="line">      7782 CLARK      MANAGER         7839 09-6月 -81           2450                    10</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000</span><br><span class="line">      7934 MILLER     CLERK           7782 23-1月 -82           1300</span><br><span class="line">      7782 CLARK      MANAGER         7839 09-6月 -81           2450</span><br><span class="line">      7839 KING       PRESIDENT            17-11月-81           5000</span><br><span class="line">      7934 MILLER     CLERK           7782 23-1月 -82           1300</span><br><span class="line"></span><br><span class="line">已选择 6 行。</span><br></pre></td></tr></table></figure>
+<h2 id="交集intersect"><a href="#交集intersect" class="headerlink" title="交集intersect"></a>交集<code>intersect</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; --筛选出工资在1200-1300之间的员工</span><br><span class="line">SQL&gt; select ename,sal</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal between 700 and 1300</span><br><span class="line">  4  intersect</span><br><span class="line">  5  select ename,sal</span><br><span class="line">  6  from emp</span><br><span class="line">  7  where sal between 1200 and 1400;</span><br><span class="line"></span><br><span class="line">ENAME             SAL</span><br><span class="line">---------- ----------</span><br><span class="line">MARTIN           1250</span><br><span class="line">MILLER           1300</span><br><span class="line">WARD             1250</span><br></pre></td></tr></table></figure>
+<h2 id="差集minus"><a href="#差集minus" class="headerlink" title="差集minus"></a>差集<code>minus</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; 筛选出工资在700-1200和1300-1400之间的员工</span><br><span class="line">SQL&gt; select ename,sal</span><br><span class="line">  2  from emp</span><br><span class="line">  3  where sal between 700 and 1300</span><br><span class="line">  4  minus</span><br><span class="line">  5  select ename,sal</span><br><span class="line">  6  from emp</span><br><span class="line">  7  where sal between 1200 and 1400;</span><br><span class="line"></span><br><span class="line">ENAME             SAL</span><br><span class="line">---------- ----------</span><br><span class="line">ADAMS            1100</span><br><span class="line">JAMES             950</span><br><span class="line">SMITH             800</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/09/Oracle(2)单行函数、多行函数/" rel="next" title="Oracle(2)单行函数、多行函数">
+                <i class="fa fa-chevron-left"></i> Oracle(2)单行函数、多行函数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/11/Oracle(4)DML、DDL、事务/" rel="prev" title="Oracle(4)DML、DDL、事务">
+                Oracle(4)DML、DDL、事务 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JiachengLai" />
+            
+              <p class="site-author-name" itemprop="name">JiachengLai</p>
+              <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，绝知此事要躬行</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多表查询"><span class="nav-number">1.</span> <span class="nav-text">多表查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#等值查询"><span class="nav-number">1.1.</span> <span class="nav-text">等值查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不等值查询"><span class="nav-number">1.2.</span> <span class="nav-text">不等值查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#外连接"><span class="nav-number">1.3.</span> <span class="nav-text">外连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自连接"><span class="nav-number">1.4.</span> <span class="nav-text">自连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层次查询"><span class="nav-number">1.5.</span> <span class="nav-text">层次查询</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子查询"><span class="nav-number">2.</span> <span class="nav-text">子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#子查询所应用的场景"><span class="nav-number">2.1.</span> <span class="nav-text">子查询所应用的场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用子查询的注意事项"><span class="nav-number">2.2.</span> <span class="nav-text">使用子查询的注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在主查询的where、select、having、from后使用子查询"><span class="nav-number">2.3.</span> <span class="nav-text">在主查询的where、select、having、from后使用子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#where后使用子查询"><span class="nav-number">2.3.1.</span> <span class="nav-text">where后使用子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#select后使用子查询"><span class="nav-number">2.3.2.</span> <span class="nav-text">select后使用子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#having后使用子查询"><span class="nav-number">2.3.3.</span> <span class="nav-text">having后使用子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#from后使用子查询"><span class="nav-number">2.3.4.</span> <span class="nav-text">from后使用子查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主查询和子查询使用两张不同表查询"><span class="nav-number">2.4.</span> <span class="nav-text">主查询和子查询使用两张不同表查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单行子查询"><span class="nav-number">2.5.</span> <span class="nav-text">单行子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多行子查询"><span class="nav-number">2.6.</span> <span class="nav-text">多行子查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#in在集合中"><span class="nav-number">2.6.1.</span> <span class="nav-text">in在集合中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#any和集合中的任意一个值比较"><span class="nav-number">2.6.2.</span> <span class="nav-text">any和集合中的任意一个值比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all和集合中的所有值比较"><span class="nav-number">2.6.3.</span> <span class="nav-text">all和集合中的所有值比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#习题"><span class="nav-number">3.</span> <span class="nav-text">习题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合运算"><span class="nav-number">4.</span> <span class="nav-text">集合运算</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#集合运算注视事项"><span class="nav-number">4.1.</span> <span class="nav-text">集合运算注视事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并集并去重union"><span class="nav-number">4.2.</span> <span class="nav-text">并集并去重union</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并集不去重union-all"><span class="nav-number">4.3.</span> <span class="nav-text">并集不去重union all</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交集intersect"><span class="nav-number">4.4.</span> <span class="nav-text">交集intersect</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#差集minus"><span class="nav-number">4.5.</span> <span class="nav-text">差集minus</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JiachengLai</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
