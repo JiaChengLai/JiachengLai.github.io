@@ -8,10 +8,21 @@
 <html class="theme-next gemini use-motion" lang="Zh-Hans">
 <head>
   <meta charset="UTF-8"/>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
-
 
 
 
@@ -139,6 +150,9 @@
 
 
 </head>
+
+<!--卖萌-->
+<script type="text/javascript" src="/js/src/mytitle.js"></script>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="Zh-Hans">
 
@@ -434,6 +448,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2018/07/22/JavaSE个人总结/" rel="prev" title="JavaSE个人总结">
+                JavaSE个人总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -513,7 +531,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -524,7 +542,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -535,7 +553,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -647,8 +665,6 @@
   
 
 
-  
-
 
 
 
@@ -687,11 +703,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 

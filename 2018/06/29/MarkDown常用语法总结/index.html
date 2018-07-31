@@ -8,10 +8,21 @@
 <html class="theme-next gemini use-motion" lang="Zh-Hans">
 <head>
   <meta charset="UTF-8"/>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
-
 
 
 
@@ -93,7 +104,7 @@
 <meta property="og:image" content="http://pbn1szxgn.bkt.clouddn.com/18-7-10/9817856.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1ch5648ca1qoj3271p42134fobsa.png-w.jpg">
 <meta property="og:image" content="http://t1.aixinxi.net/o_1ch56gpflpg01qbvljm2ul14ia.png-w.jpg">
-<meta property="og:updated_time" content="2018-07-10T12:34:16.122Z">
+<meta property="og:updated_time" content="2018-07-29T19:56:53.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MarkDown常用语法总结">
 <meta name="twitter:description" content="前言使用Markdown来做笔记已经有段时间了，但从未系统的总结一番，都是用到哪些语法直接google着用的，但感觉自己还是对Markdown知之甚少，于是便有了以下的总结，方便日后回忆使用，顺便也是通过编写这篇文章来加深自己对Markdown的理解。  标题1.# 号标记在标题的前面加上1~6个#号,依次代表一到六级标题123456# 一级标题## 二级标题### 三级标题#### 四级标题##">
@@ -144,6 +155,9 @@
 
 
 </head>
+
+<!--卖萌-->
+<script type="text/javascript" src="/js/src/mytitle.js"></script>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="Zh-Hans">
 
@@ -562,7 +576,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -573,7 +587,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -584,7 +598,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -696,8 +710,6 @@
   
 
 
-  
-
 
 
 
@@ -736,11 +748,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
