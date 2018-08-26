@@ -256,6 +256,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/mybatis01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/14/mybatis01/" itemprop="url">Mybatis学习(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-14T04:26:34+08:00">
+                2018-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">Java后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Mybatis的介绍"><a href="#Mybatis的介绍" class="headerlink" title="Mybatis的介绍"></a>Mybatis的介绍</h3><h4 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h4><p>MyBatis 本是apache的一个开源项目 iBatis<br>2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis<br>2013年11月迁移到Github</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL 本身，而不需要花费精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码。</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>Mybatis通过<strong>xml</strong>或<strong>注解</strong>的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，并通过<strong>java对象和statement中的sql进行映射</strong>生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射成java对象并返回。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/14/mybatis01/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/删除文件夹中重复文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -348,7 +500,7 @@
 
       
         
-          <h4 id="FileMD5Calculator-计算文件MD5工具类"><a href="#FileMD5Calculator-计算文件MD5工具类" class="headerlink" title="FileMD5Calculator 计算文件MD5工具类"></a>FileMD5Calculator 计算文件MD5工具类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * author:JiachengLai</span></span><br><span class="line"><span class="comment"> * Date:18-7-31</span></span><br><span class="line"><span class="comment"> * Time:20:27</span></span><br><span class="line"><span class="comment"> * Description: 获得文件的MD5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> priv.jc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileMD5Calculator</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 获得文件的MD5</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Param</span>: file 要计算的文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: MD5值的字符序列</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>: JiachengLai</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>: 18-7-31</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title">getMd5</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        StringBuilder result = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            MessageDigest md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">            FileInputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            BufferedInputStream bs = <span class="keyword">new</span> BufferedInputStream(in);</span><br><span class="line">            <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[bs.available()]; <span class="comment">//定义数组b为文件不受阻塞的可读取字节数</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//将文件以字节方式读取到数组b中</span></span><br><span class="line">            <span class="keyword">while</span> ((bs.read(b, <span class="number">0</span>, b.length)) != -<span class="number">1</span>) ;</span><br><span class="line">            md5.update(b);  <span class="comment">//执行MD5算法</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">byte</span> by : md5.digest()) &#123;</span><br><span class="line">                result = result.append(String.format(<span class="string">"%02X"</span>, by));   <span class="comment">//将生成字节转为16进制的字符串</span></span><br><span class="line">            &#125;</span><br><span class="line">            bs.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"无法进行Md5加密算法，可能是因为的java虚拟机版本太低"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"系统找不到指定的路径,请重新输入"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"IO错误"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h4 id="FileMD5Calculator-计算文件MD5工具类"><a href="#FileMD5Calculator-计算文件MD5工具类" class="headerlink" title="FileMD5Calculator 计算文件MD5工具类"></a>FileMD5Calculator 计算文件MD5工具类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * author:JiachengLai</span></span><br><span class="line"><span class="comment"> * Date:18-7-31</span></span><br><span class="line"><span class="comment"> * Time:20:27</span></span><br><span class="line"><span class="comment"> * Description: 获得文件的MD5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> priv.jc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileMD5Calculator</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 获得文件的MD5</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Param</span>: file 要计算的文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: MD5值的字符序列</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>: JiachengLai</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>: 18-7-31</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title">getMd5</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        StringBuilder result = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            MessageDigest md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">            FileInputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            BufferedInputStream bs = <span class="keyword">new</span> BufferedInputStream(in);</span><br><span class="line">            <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[bs.available()]; <span class="comment">//定义数组b为文件不受阻塞的可读取字节数</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//将文件以字节方式读取到数组b中</span></span><br><span class="line">            <span class="keyword">while</span> ((bs.read(b, <span class="number">0</span>, b.length)) != -<span class="number">1</span>) ;</span><br><span class="line">            md5.update(b);  <span class="comment">//执行MD5算法</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">byte</span> by : md5.digest()) &#123;</span><br><span class="line">                result = result.append(String.format(<span class="string">"%02X"</span>, by));   <span class="comment">//将生成字节转为16进制的字符串</span></span><br><span class="line">            &#125;</span><br><span class="line">            bs.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"无法进行Md5加密算法，可能是因为的java虚拟机版本太低"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"系统找不到指定的路径,请重新输入"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"IO错误"</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (OutOfMemoryError e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"文件"</span>+file.getName()+<span class="string">"太大啦，无法计算该文件的MD5值.."</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/31/删除文件夹中重复文件/#more" rel="contents">
@@ -695,159 +847,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/Oracle(5)PLSQL Developer安装、PLSQL基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JiachengLai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晨">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/12/Oracle(5)PLSQL Developer安装、PLSQL基础/" itemprop="url">Oracle(5)PLSQL Developer安装、PL/SQL基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T22:17:12+08:00">
-                2018-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="PL-SQL-Developer安装"><a href="#PL-SQL-Developer安装" class="headerlink" title="PL/SQL Developer安装"></a>PL/SQL Developer安装</h1><p>1.双击安装图标</p>
-<p><img src="http://pbn1szxgn.bkt.clouddn.com/18-7-14/80336957.jpg" alt=""><br>提示信息：</p>
-<p><img src="http://pbn1szxgn.bkt.clouddn.com/18-7-14/61793890.jpg" alt=""><br>2.会进入以下界面</p>
-<p><img src="http://pbn1szxgn.bkt.clouddn.com/18-7-14/64176480.jpg" alt=""><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/12/Oracle(5)PLSQL Developer安装、PLSQL基础/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-  <div>
-    
-  </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -902,7 +901,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -924,7 +923,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
