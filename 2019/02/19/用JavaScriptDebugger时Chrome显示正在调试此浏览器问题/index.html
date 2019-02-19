@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="Zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="起因Tomcat配置勾选了with JavaScript Debugger并启动后发现浏览器tab页下方出现了 一行显眼的提示条  将其直接关闭后 发现无法进行js调试这让强迫症的我不能忍了查阅资料 发现以下两种解决方案 解决方案一:在chrome://flags开启Silent Debugging进入 chrome://flags/界面  解决方案二:使用命令行启动参数以下为官方文档  Note">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用JavaScriptDebugger时Chrome显示正在调试此浏览器问题">
+<meta property="og:url" content="http://yoursite.com/2019/02/19/用JavaScriptDebugger时Chrome显示正在调试此浏览器问题/index.html">
+<meta property="og:site_name" content="晨">
+<meta property="og:description" content="起因Tomcat配置勾选了with JavaScript Debugger并启动后发现浏览器tab页下方出现了 一行显眼的提示条  将其直接关闭后 发现无法进行js调试这让强迫症的我不能忍了查阅资料 发现以下两种解决方案 解决方案一:在chrome://flags开启Silent Debugging进入 chrome://flags/界面  解决方案二:使用命令行启动参数以下为官方文档  Note">
+<meta property="og:locale" content="Zh-Hans">
+<meta property="og:image" content="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/XXXX%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8.png">
+<meta property="og:image" content="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/chromeFlag%E4%B8%AD%E8%AE%BE%E7%BD%AESilentDdebugger.png">
+<meta property="og:image" content="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/%E6%B7%BB%E5%8A%A0silentDebugger%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0.png">
+<meta property="og:updated_time" content="2019-02-19T06:41:44.879Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用JavaScriptDebugger时Chrome显示正在调试此浏览器问题">
+<meta name="twitter:description" content="起因Tomcat配置勾选了with JavaScript Debugger并启动后发现浏览器tab页下方出现了 一行显眼的提示条  将其直接关闭后 发现无法进行js调试这让强迫症的我不能忍了查阅资料 发现以下两种解决方案 解决方案一:在chrome://flags开启Silent Debugging进入 chrome://flags/界面  解决方案二:使用命令行启动参数以下为官方文档  Note">
+<meta name="twitter:image" content="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/XXXX%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/19/用JavaScriptDebugger时Chrome显示正在调试此浏览器问题/"/>
+
+
+
+
+
+  <title>用JavaScriptDebugger时Chrome显示正在调试此浏览器问题 | 晨</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<!--卖萌-->
+<script type="text/javascript" src="/js/src/mytitle.js"></script>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="Zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">晨</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学无止境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/用JavaScriptDebugger时Chrome显示正在调试此浏览器问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用JavaScriptDebugger时Chrome显示正在调试此浏览器问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-19T10:34:14+08:00">
+                2019-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>Tomcat配置勾选了<code>with JavaScript Debugger</code>并启动后<br>发现浏览器tab页下方出现了 <font color="red">一行显眼的提示条</font></p>
+<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/XXXX%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8.png" alt=""></p>
+<p>将其直接关闭后 发现<strong>无法进行js调试</strong><br>这让强迫症的我不能忍了<br>查阅资料 发现以下两种解决方案</p>
+<h3 id="解决方案一-在chrome-flags开启Silent-Debugging"><a href="#解决方案一-在chrome-flags开启Silent-Debugging" class="headerlink" title="解决方案一:在chrome://flags开启Silent Debugging"></a>解决方案一:在<code>chrome://flags</code>开启<code>Silent Debugging</code></h3><p>进入 <a href="chrome://flags/" target="_blank" rel="noopener">chrome://flags/</a>界面</p>
+<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/chromeFlag%E4%B8%AD%E8%AE%BE%E7%BD%AESilentDdebugger.png" alt=""></p>
+<h3 id="解决方案二-使用命令行启动参数"><a href="#解决方案二-使用命令行启动参数" class="headerlink" title="解决方案二:使用命令行启动参数"></a>解决方案二:使用命令行启动参数</h3><p>以下为官方文档</p>
+<blockquote>
+<p>Note that if you look at chrome://flags to see if the command line option is active, the state might not be accurately reflected. Check chrome://version for the complete command line used in the current instance.<br>请注意,如果你在<code>chrome://flags</code>中查看命令行选项是否被激活时,其状态可能无法准确反映。检查<code>chrome://version</code>来查看完整的当前实例中已使用命令行参数。<br><a id="more"></a></p>
+</blockquote>
+<blockquote>
+<p>Windows<br>Exit any running-instance of Chrome.<br>退出Chrome的所有正在运行的实例。<br>Right click on your “Chrome” shortcut.<br>右键单击“Chrome”快捷方式。<br>Choose properties.<br>选择属性。<br>At the end of your “Target:” line add the command line flags. For example:<br>–disable-gpu-vsync<br>在“目标：”行的末尾添加命令行标志。例如：<br>–disable-gpu-vsyncWith that example flag, it should look like: chrome.exe –disable-gpu-vsync<br>使用该示例标志，它应该如下所示： chrome.exe –disable-gpu-vsync<br>Launch Chrome like normal with the shortcut.<br>使用快捷方式正常启动Chrome。</p>
+</blockquote>
+<p>如官方文档所述<br>打开chrome快捷方式属性，添加命令行启动参数：<code>--silent-debugger-extension-api</code></p>
+<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/%E6%B7%BB%E5%8A%A0silentDebugger%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0.png" alt=""></p>
+<h4 id="附录-常用命令行启动参数列表"><a href="#附录-常用命令行启动参数列表" class="headerlink" title="附录(常用命令行启动参数列表)"></a>附录(常用命令行启动参数列表)</h4><p>命令行启动参数列表大全<a href="https://peter.sh/experiments/chromium-command-line-switches/" target="_blank" rel="noopener">https://peter.sh/experiments/chromium-command-line-switches/</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序号</th>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">–allow-outdated-plugins</td>
+<td style="text-align:left">不停用过期的插件。</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">–allow-running-insecure-content</td>
+<td style="text-align:left">默认情况下，https 页面不允许从 http 链接引用 javascript/css/plug-ins。添加这一参数会放行这些内容。</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">–allow-scripting-gallery</td>
+<td style="text-align:left">允许拓展脚本在官方应用中心生效。默认情况下，出于安全因素考虑这些脚本都会被阻止。</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">–disable-accelerated-2d-canvas</td>
+<td style="text-align:left">停用 GPU 加速二维画布。</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">–disable-accelerated-video</td>
+<td style="text-align:left">停用 GPU 加速视频。</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left">–disable-dart</td>
+<td style="text-align:left">停用 Dart。</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left">–disable-desktop-notifications</td>
+<td style="text-align:left">禁用桌面通知，在 Windows 中桌面通知默认是启用的。</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left">–disable-extensions</td>
+<td style="text-align:left">禁用拓展。</td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left">–disable-file-system</td>
+<td style="text-align:left">停用 FileSystem API。（注意一些拓展如 Adblock Plus for Google Chrome™ 依赖此 API 运行）</td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">–disable-java</td>
+<td style="text-align:left">停用 Java。</td>
+</tr>
+<tr>
+<td style="text-align:left">11</td>
+<td style="text-align:left">–disable-local-storage</td>
+<td style="text-align:left">禁用 LocalStorage。</td>
+</tr>
+<tr>
+<td style="text-align:left">12</td>
+<td style="text-align:left">–disable-preconnect</td>
+<td style="text-align:left">停用 TCP/IP 预连接。</td>
+</tr>
+<tr>
+<td style="text-align:left">13</td>
+<td style="text-align:left">–disable-remote-fonts</td>
+<td style="text-align:left">关闭远程字体支持。SVG 中字体不受此参数影响。</td>
+</tr>
+<tr>
+<td style="text-align:left">14</td>
+<td style="text-align:left">–disable-speech-input</td>
+<td style="text-align:left">停用语音输入。</td>
+</tr>
+<tr>
+<td style="text-align:left">15</td>
+<td style="text-align:left">–disable-sync</td>
+<td style="text-align:left">停用同步功能。</td>
+</tr>
+<tr>
+<td style="text-align:left">16</td>
+<td style="text-align:left">–disable-ssl3</td>
+<td style="text-align:left">停用 SSL v3。</td>
+</tr>
+<tr>
+<td style="text-align:left">17</td>
+<td style="text-align:left">–disable-web-security</td>
+<td style="text-align:left">不强制遵守同源策略，供网站开发人员测试站点使用。</td>
+</tr>
+<tr>
+<td style="text-align:left">18</td>
+<td style="text-align:left">–disk-cache-dir</td>
+<td style="text-align:left">将缓存设置在给定的路径。</td>
+</tr>
+<tr>
+<td style="text-align:left">19</td>
+<td style="text-align:left">–disk-cache-size</td>
+<td style="text-align:left">设置缓存大小上限，以字节为单位。</td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">–dns-prefetch-disable</td>
+<td style="text-align:left">停用DNS预读。</td>
+</tr>
+<tr>
+<td style="text-align:left">21</td>
+<td style="text-align:left">–enable-print-preview</td>
+<td style="text-align:left">启用打印预览。</td>
+</tr>
+<tr>
+<td style="text-align:left">22</td>
+<td style="text-align:left">–extensions-update-frequency</td>
+<td style="text-align:left">设定拓展自动更新频率，以秒为单位。</td>
+</tr>
+<tr>
+<td style="text-align:left">23</td>
+<td style="text-align:left">–incognito</td>
+<td style="text-align:left">让浏览器直接以隐身模式启动。</td>
+</tr>
+<tr>
+<td style="text-align:left">24</td>
+<td style="text-align:left">–keep-alive-for-test</td>
+<td style="text-align:left">最后一个标签关闭后仍保持浏览器进程。（某种意义上可以提高热启动速度，不过你最好得有充足的内存）</td>
+</tr>
+<tr>
+<td style="text-align:left">25</td>
+<td style="text-align:left">–kiosk</td>
+<td style="text-align:left">启用kiosk模式。（一种类似于全屏的浏览模式）</td>
+</tr>
+<tr>
+<td style="text-align:left">26</td>
+<td style="text-align:left">–lang</td>
+<td style="text-align:left">使用指定的语言。</td>
+</tr>
+<tr>
+<td style="text-align:left">27</td>
+<td style="text-align:left">–no-displaying-insecure-content</td>
+<td style="text-align:left">默认情况下，https 页面允许从 http 链接引用图片/字体/框架。添加这一参数会阻止这些内容。</td>
+</tr>
+<tr>
+<td style="text-align:left">28</td>
+<td style="text-align:left">–no-first-run</td>
+<td style="text-align:left">跳过 Chromium 首次运行检查。</td>
+</tr>
+<tr>
+<td style="text-align:left">29</td>
+<td style="text-align:left">–no-referrers</td>
+<td style="text-align:left">不发送 Http-Referer 头。</td>
+</tr>
+<tr>
+<td style="text-align:left">30</td>
+<td style="text-align:left">–no-sandbox</td>
+<td style="text-align:left">彻底停用沙箱。</td>
+</tr>
+<tr>
+<td style="text-align:left">31</td>
+<td style="text-align:left">–no-startup-window</td>
+<td style="text-align:left">启动时不建立窗口。</td>
+</tr>
+<tr>
+<td style="text-align:left">32</td>
+<td style="text-align:left">–proxy-pac-url</td>
+<td style="text-align:left">使用给定 URL 的 pac 代理脚本。（也可以使用本地文件，如 –proxy-pac-url=”file:\c:\proxy.pac”）</td>
+</tr>
+<tr>
+<td style="text-align:left">33</td>
+<td style="text-align:left">–proxy-server</td>
+<td style="text-align:left">使用给定的代理服务器，这个参数只对 http 和 https 有效。（例如 –proxy-server=127.0.0.1:8087 ）</td>
+</tr>
+<tr>
+<td style="text-align:left">34</td>
+<td style="text-align:left">–show-component-extension-options</td>
+<td style="text-align:left">让自带的拓展组件显示在 chrome://settings/extensions 里。（目前有一个 “Bookmark Manager 0.1”）</td>
+</tr>
+<tr>
+<td style="text-align:left">35</td>
+<td style="text-align:left">–single-process</td>
+<td style="text-align:left">以单进程模式运行 Chromium。（启动时浏览器会给出不安全警告）</td>
+</tr>
+<tr>
+<td style="text-align:left">36</td>
+<td style="text-align:left">–skip-gpu-data-loading</td>
+<td style="text-align:left">跳过启动时的 GPU 信息收集、黑名单读取与黑名单自动更新，这样一来，所有的 GPU 功能都可供使用，并且 about:gpu 页面会显示空白。此参数仅供测试使用。</td>
+</tr>
+<tr>
+<td style="text-align:left">37</td>
+<td style="text-align:left">–start-maximized</td>
+<td style="text-align:left">启动时最大化。</td>
+</tr>
+<tr>
+<td style="text-align:left">38</td>
+<td style="text-align:left">–touch-optimized-ui</td>
+<td style="text-align:left">使用对触屏更友好的用户界面。（目前来看似乎只是把一些字体放大了）</td>
+</tr>
+<tr>
+<td style="text-align:left">39</td>
+<td style="text-align:left">–user-agent</td>
+<td style="text-align:left">使用给定的 User-Agent 字符串。</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #555;font-size:14px;">-------------The End-------------</div>
+    
+</div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i>JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/25/IDEA文件夹类型指南/" rel="next" title="Idea文件夹类型指南">
+                <i class="fa fa-chevron-left"></i> Idea文件夹类型指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JiachengLai" />
+            
+              <p class="site-author-name" itemprop="name">JiachengLai</p>
+              <p class="site-description motion-element" itemprop="description">纸上得来终觉浅，绝知此事要躬行</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案一-在chrome-flags开启Silent-Debugging"><span class="nav-number">2.</span> <span class="nav-text">解决方案一:在chrome://flags开启Silent Debugging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案二-使用命令行启动参数"><span class="nav-number">3.</span> <span class="nav-text">解决方案二:使用命令行启动参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#附录-常用命令行启动参数列表"><span class="nav-number">3.1.</span> <span class="nav-text">附录(常用命令行启动参数列表)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JiachengLai</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
