@@ -256,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/JavaSE个人总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/用JavaScriptDebugger时Chrome显示正在调试此浏览器问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="JiachengLai">
@@ -275,7 +275,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/22/JavaSE个人总结/" itemprop="url">JavaSE个人总结</a></h1>
+                <a class="post-title-link" href="/2019/02/19/用JavaScriptDebugger时Chrome显示正在调试此浏览器问题/" itemprop="url">用JavaScriptDebugger时Chrome显示正在调试此浏览器问题</a></h1>
         
 
         <div class="post-meta">
@@ -287,8 +287,475 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-22T03:30:26+08:00">
-                2018-07-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-19T10:34:14+08:00">
+                2019-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>Tomcat配置勾选了<code>with JavaScript Debugger</code>并启动后<br>发现浏览器tab页下方出现了 <font color="red">一行显眼的提示条</font></p>
+<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/XXXX%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8.png" alt=""></p>
+<p>将其直接关闭后 发现<strong>无法进行js调试</strong><br>这让强迫症的我不能忍了<br>查阅资料 发现以下两种解决方案</p>
+<h3 id="解决方案一-在chrome-flags开启Silent-Debugging"><a href="#解决方案一-在chrome-flags开启Silent-Debugging" class="headerlink" title="解决方案一:在chrome://flags开启Silent Debugging"></a>解决方案一:在<code>chrome://flags</code>开启<code>Silent Debugging</code></h3><p>进入 <a href="chrome://flags/" target="_blank" rel="noopener">chrome://flags/</a>界面</p>
+<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/19-2-19%20%E7%94%A8JavaScriptDebugger%E6%97%B6Chrome%E6%98%BE%E7%A4%BA%E6%AD%A3%E5%9C%A8%E8%B0%83%E8%AF%95%E6%AD%A4%E6%B5%8F%E8%A7%88%E5%99%A8%E9%97%AE%E9%A2%98/chromeFlag%E4%B8%AD%E8%AE%BE%E7%BD%AESilentDdebugger.png" alt=""></p>
+<h3 id="解决方案二-使用命令行启动参数"><a href="#解决方案二-使用命令行启动参数" class="headerlink" title="解决方案二:使用命令行启动参数"></a>解决方案二:使用命令行启动参数</h3><p>以下为官方文档</p>
+<blockquote>
+<p>Note that if you look at chrome://flags to see if the command line option is active, the state might not be accurately reflected. Check chrome://version for the complete command line used in the current instance.<br>请注意,如果你在<code>chrome://flags</code>中查看命令行选项是否被激活时,其状态可能无法准确反映。检查<code>chrome://version</code>来查看完整的当前实例中已使用命令行参数。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/19/用JavaScriptDebugger时Chrome显示正在调试此浏览器问题/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/IDEA文件夹类型指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/25/IDEA文件夹类型指南/" itemprop="url">Idea文件夹类型指南</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-25T21:26:34+08:00">
+                2018-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Idea/" itemprop="url" rel="index">
+                    <span itemprop="name">Idea</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在IDEA中可以将文件夹标记为各种文件夹类型<br><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/18-9-26/76722117.jpg" alt=""><br>以下就罗列这写文件夹类型的作用与区别</p>
+<h2 id="Source-roots-source-folders"><a href="#Source-roots-source-folders" class="headerlink" title="Source roots(source folders)"></a>Source roots(source folders)</h2><blockquote>
+<p>By assigning a folder to this category, you tell IntelliJ IDEA that this folder and its subfolders contain source code that should be compiled as part of the build process.</p>
+</blockquote>
+<p>通过将文件夹指定为这种类别，来告诉IntelliJ IDEA，这个文件夹和它的子文件夹中包含源码，在构建工程时，需要作为一部分被编译进去。</p>
+<h2 id="Test-source-roots"><a href="#Test-source-roots" class="headerlink" title="Test source roots"></a>Test source roots</h2><blockquote>
+<p>These roots are similar to source roots but are for code intended for testing (e.g. for unit tests). Test source folders let you keep the code related to testing separate from the production code.Compilation results for sources and test sources, normally, are placed into different folders.</p>
+</blockquote>
+<p>这个类型的文件夹与<code>sources root</code>类似，都是用于存放源码，不过是测试的源码（比如单元测试）。<code>test sources root</code> 文件夹可以帮助你将测试代码和产品代码分离开。通常<code>sources root</code>和<code>test sources root</code>的编译结果被放在不同的文件夹中。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/25/IDEA文件夹类型指南/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/mybatis01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/14/mybatis01/" itemprop="url">Mybatis学习(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-14T04:26:34+08:00">
+                2018-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaEE/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaEE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Mybatis的介绍"><a href="#Mybatis的介绍" class="headerlink" title="Mybatis的介绍"></a>Mybatis的介绍</h3><h4 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h4><p>MyBatis 本是apache的一个开源项目 iBatis<br>2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis<br>2013年11月迁移到Github</p>
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL 本身，而不需要花费精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码。</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>Mybatis通过<strong>xml</strong>或<strong>注解</strong>的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，并通过<strong>java对象和statement中的sql进行映射</strong>生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射成java对象并返回。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/08/14/mybatis01/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/删除文件夹中重复文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/删除文件夹中重复文件/" itemprop="url">删除文件夹中重复文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-31T23:22:16+08:00">
+                2018-07-31
               </time>
             
 
@@ -348,467 +815,10 @@
 
       
         
-          「这是一篇私密博客」
+          <h4 id="FileMD5Calculator-计算文件MD5工具类"><a href="#FileMD5Calculator-计算文件MD5工具类" class="headerlink" title="FileMD5Calculator 计算文件MD5工具类"></a>FileMD5Calculator 计算文件MD5工具类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * author:JiachengLai</span></span><br><span class="line"><span class="comment"> * Date:18-7-31</span></span><br><span class="line"><span class="comment"> * Time:20:27</span></span><br><span class="line"><span class="comment"> * Description: 获得文件的MD5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> priv.jc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileMD5Calculator</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 获得文件的MD5</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Param</span>: file 要计算的文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: MD5值的字符序列</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>: JiachengLai</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>: 18-7-31</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title">getMd5</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        StringBuilder result = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            MessageDigest md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">            FileInputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            BufferedInputStream bs = <span class="keyword">new</span> BufferedInputStream(in);</span><br><span class="line">            <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[bs.available()]; <span class="comment">//定义数组b为文件不受阻塞的可读取字节数</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//将文件以字节方式读取到数组b中</span></span><br><span class="line">            <span class="keyword">while</span> ((bs.read(b, <span class="number">0</span>, b.length)) != -<span class="number">1</span>) ;</span><br><span class="line">            md5.update(b);  <span class="comment">//执行MD5算法</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">byte</span> by : md5.digest()) &#123;</span><br><span class="line">                result = result.append(String.format(<span class="string">"%02X"</span>, by));   <span class="comment">//将生成字节转为16进制的字符串</span></span><br><span class="line">            &#125;</span><br><span class="line">            bs.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"无法进行Md5加密算法，可能是因为的java虚拟机版本太低"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"系统找不到指定的路径,请重新输入"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"IO错误"</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (OutOfMemoryError e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"文件"</span>+file.getName()+<span class="string">"太大啦，无法计算该文件的MD5值.."</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/22/JavaSE个人总结/">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-  <div>
-    
-  </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/13/Oracle(6)存储过程和函数、包和包体、触发器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JiachengLai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晨">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/13/Oracle(6)存储过程和函数、包和包体、触发器/" itemprop="url">Oracle(6)存储过程和函数、包和包体、触发器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-13T23:14:36+08:00">
-                2018-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="存储过程-Stored-Procedure"><a href="#存储过程-Stored-Procedure" class="headerlink" title="存储过程(Stored Procedure)"></a>存储过程(<code>Stored Procedure</code>)</h1><h2 id="什么是存储过程"><a href="#什么是存储过程" class="headerlink" title="什么是存储过程"></a>什么是存储过程</h2><p>存储过程(<code>Stored Procedure</code>)是在大型数据库系统中，一组为了完成特定功能的SQL语句集，经编译后存储在数据库中，用户通过指定存储过程的名字并给出参数（如果该存储过程带有参数）来执行它。存储过程是数据库中的一个重要对象，任何一个设计良好的数据库应用程序都应该用到存储过程。</p>
-<h2 id="存储过程的创建语法"><a href="#存储过程的创建语法" class="headerlink" title="存储过程的创建语法"></a>存储过程的创建语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create[or replace] procedure 过程名[&#123;参数名 in/out 数据类型&#125;]</span><br><span class="line">as</span><br><span class="line">begin</span><br><span class="line">    PL/SQL子程序体;</span><br><span class="line">end;</span><br></pre></td></tr></table></figure>
-<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create[or replace] procedure 过程名[&#123;参数名 in/out 数据类型&#125;]</span><br><span class="line">is</span><br><span class="line">begin</span><br><span class="line">    PL/SQL子程序体;</span><br><span class="line">end 过程名;</span><br></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/13/Oracle(6)存储过程和函数、包和包体、触发器/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-  <div>
-    
-  </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/12/Oracle(5)PLSQL Developer安装、PLSQL基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JiachengLai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晨">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/12/Oracle(5)PLSQL Developer安装、PLSQL基础/" itemprop="url">Oracle(5)PLSQL Developer安装、PL/SQL基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-12T22:17:12+08:00">
-                2018-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="PL-SQL-Developer安装"><a href="#PL-SQL-Developer安装" class="headerlink" title="PL/SQL Developer安装"></a>PL/SQL Developer安装</h1><p>1.双击安装图标</p>
-<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/18-7-14/80336957.jpg" alt=""><br>提示信息：</p>
-<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/18-7-14/61793890.jpg" alt=""><br>2.会进入以下界面</p>
-<p><img src="https://hexoblog-1257009793.cos.ap-shanghai.myqcloud.com/18-7-14/64176480.jpg" alt=""><br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/12/Oracle(5)PLSQL Developer安装、PLSQL基础/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-  <div>
-    
-  </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/11/Oracle(4)DML、DDL、事务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JiachengLai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晨">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/11/Oracle(4)DML、DDL、事务/" itemprop="url">Oracle(4)DML、DDL、事务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-11T15:34:52+08:00">
-                2018-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Oracle/" itemprop="url" rel="index">
-                    <span itemprop="name">Oracle</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="SQL语句类型"><a href="#SQL语句类型" class="headerlink" title="SQL语句类型"></a>SQL语句类型</h1><h2 id="三种SQL语句类型"><a href="#三种SQL语句类型" class="headerlink" title="三种SQL语句类型"></a>三种SQL语句类型</h2><p>1、DML（Data Manipulation Language 数据操作语言）:select insert update delete<br>2、DDL(Data Definition Language 数据定义语言): create/alter/truncate/drop table(表),create/drop view(视图),sequence(序列),index(索引),synonym(同义词)<br>3、DCL(Data Control Language 数据控制语言): grant(授权) revoke(撤销权限)</p>
-<h2 id="数据操作语言DML"><a href="#数据操作语言DML" class="headerlink" title="数据操作语言DML"></a>数据操作语言<code>DML</code></h2><h3 id="插入insert"><a href="#插入insert" class="headerlink" title="插入insert"></a>插入<code>insert</code></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; insert into emp(empno,ename,sal,deptno) values(1002,&apos;TOM&apos;,3000,10);</span><br><span class="line"></span><br><span class="line">已创建 1 行。</span><br></pre></td></tr></table></figure>
-<h4 id="使用地址符-amp-完成数据批量插入"><a href="#使用地址符-amp-完成数据批量插入" class="headerlink" title="使用地址符&amp;完成数据批量插入"></a>使用地址符<code>&amp;</code>完成数据批量插入</h4><p><strong>类似<code>PreparedStatement pst = &quot;insert into emp(empno,ename,sal,deptno) values(?,?,?,?)&quot;</code>的插入数据方式</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/11/Oracle(4)DML、DDL、事务/#more" rel="contents">
+            <a class="btn" href="/2018/07/31/删除文件夹中重复文件/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -854,7 +864,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -904,7 +914,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -915,7 +925,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -926,7 +936,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
