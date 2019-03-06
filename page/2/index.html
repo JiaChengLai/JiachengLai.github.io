@@ -256,226 +256,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/hibernate总结篇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="JiachengLai">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="晨">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/19/hibernate总结篇/" itemprop="url">Hibernate总结篇</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-19T10:34:14+08:00">
-                2019-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaEE/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaEE</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="什么是Hibernate"><a href="#什么是Hibernate" class="headerlink" title="什么是Hibernate"></a>什么是Hibernate</h2><p>Hibernate是一个开源的ORM（<code>Object Relational Mapping</code>，对象关系映射）框架，对JDBC进行了轻量级的封装，也就说Hibernate最终还是通过JDBC进行数据库的操作。它将POJO（<code>Plain Ordinary Java Object</code>）与数据库建立映射关系，是一个全自动的ORM框架，它可以自动生成SQL语句，自动执行，使程序员可以用<strong>面向对象编程思想</strong>来操纵数据库。</p>
-<h2 id="Hibernate的优点"><a href="#Hibernate的优点" class="headerlink" title="Hibernate的优点"></a>Hibernate的优点</h2><ul>
-<li>对JDBC操作数据库的代码进行了轻量级封装，简化了操作数据库的繁琐重复性代码，减少了内存消耗，加快了运行效率。</li>
-<li>将对数据库的操作转换为对Java对象的操作，从而简化开发。通过修改一个“持久化”对象的属性从而修改数据库表中对应的记录数据。</li>
-<li>提供线程和进程两个级别的缓存提升应用程序性能。</li>
-<li>有丰富的映射方式，可将Java对象之间的关系转换为数据库表之间的关系。</li>
-<li>屏蔽不同数据库实现之间的差异。在Hibernate中只需要通过“方言”的形式指定当前使用的数据库，就可以根据底层数据库的实际情况生成适合的SQL语句。</li>
-<li>非侵入式：Hibernate不要求持久化类实现任何接口或继承任何类，POJO即可。</li>
-</ul>
-<h2 id="所用Jar包-基于hibernate-release-5-0-7-Final"><a href="#所用Jar包-基于hibernate-release-5-0-7-Final" class="headerlink" title="所用Jar包(基于hibernate-release-5.0.7.Final)"></a>所用Jar包(基于<code>hibernate-release-5.0.7.Final</code>)</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">Jar包</th>
-<th style="text-align:left">介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><code>antlr-2.7.7</code></td>
-<td style="text-align:left">语言转换器，Hibernate用其实现HQL到SQL的转换</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>dom4j-1.6.1</code></td>
-<td style="text-align:left">Dom4j XML解析器</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>geronimo-jta_1.1_spec-1.1.1</code></td>
-<td style="text-align:left">事务相关，JTA（<code>Java Transaction API</code>）</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>jandex-2.0.0.Final</code></td>
-<td style="text-align:left">Jandex在编译时刻扫描代码中annotation，并将index存储于文件中</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>javassist-3.18.1-GA</code></td>
-<td style="text-align:left">代码生成工具，Hibernate用它在运行时拓展Java类</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>jboss-logging-3.3.0.Final</code></td>
-<td style="text-align:left">日志相关</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>hibernate-commons-annotations-5.0.1.Final</code></td>
-<td style="text-align:left">Hibernate注解相关</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>hibernate-core-5.0.7.Final</code></td>
-<td style="text-align:left">Hibernate核心包</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>hibernate-jpa-2.1-api-1.0.0.Final</code></td>
-<td style="text-align:left">Hibernate的Java持久层API，JPA（<code>Java Persistence API</code>）</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>mysql-connector-java-8.0.15</code></td>
-<td style="text-align:left">MySQL驱动包,连接驱动版本匹配本地MySQL版本</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>log4j-1.2.16</code></td>
-<td style="text-align:left">日志记录</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>slf4j-api-1.6.1</code></td>
-<td style="text-align:left">日志记录</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>slf4j-log4j12-1.7.2</code></td>
-<td style="text-align:left">日志记录</td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/02/19/hibernate总结篇/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-  <div>
-    
-  </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/19/用JavaScriptDebugger时Chrome显示正在调试此浏览器问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -930,11 +710,161 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/删除文件夹中重复文件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JiachengLai">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="晨">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/31/删除文件夹中重复文件/" itemprop="url">删除文件夹中重复文件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-31T23:22:16+08:00">
+                2018-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaSE</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="FileMD5Calculator-计算文件MD5工具类"><a href="#FileMD5Calculator-计算文件MD5工具类" class="headerlink" title="FileMD5Calculator 计算文件MD5工具类"></a>FileMD5Calculator 计算文件MD5工具类</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * author:JiachengLai</span></span><br><span class="line"><span class="comment"> * Date:18-7-31</span></span><br><span class="line"><span class="comment"> * Time:20:27</span></span><br><span class="line"><span class="comment"> * Description: 获得文件的MD5</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> priv.jc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.security.MessageDigest;</span><br><span class="line"><span class="keyword">import</span> java.security.NoSuchAlgorithmException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileMD5Calculator</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Description</span>: 获得文件的MD5</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Param</span>: file 要计算的文件</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span>: MD5值的字符序列</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Author</span>: JiachengLai</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@Date</span>: 18-7-31</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> StringBuilder <span class="title">getMd5</span><span class="params">(File file)</span> </span>&#123;</span><br><span class="line">        StringBuilder result = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            MessageDigest md5 = MessageDigest.getInstance(<span class="string">"MD5"</span>);</span><br><span class="line">            FileInputStream in = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            BufferedInputStream bs = <span class="keyword">new</span> BufferedInputStream(in);</span><br><span class="line">            <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[bs.available()]; <span class="comment">//定义数组b为文件不受阻塞的可读取字节数</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//将文件以字节方式读取到数组b中</span></span><br><span class="line">            <span class="keyword">while</span> ((bs.read(b, <span class="number">0</span>, b.length)) != -<span class="number">1</span>) ;</span><br><span class="line">            md5.update(b);  <span class="comment">//执行MD5算法</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">byte</span> by : md5.digest()) &#123;</span><br><span class="line">                result = result.append(String.format(<span class="string">"%02X"</span>, by));   <span class="comment">//将生成字节转为16进制的字符串</span></span><br><span class="line">            &#125;</span><br><span class="line">            bs.close();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NoSuchAlgorithmException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"无法进行Md5加密算法，可能是因为的java虚拟机版本太低"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (FileNotFoundException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"系统找不到指定的路径,请重新输入"</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"IO错误"</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span> (OutOfMemoryError e)&#123;</span><br><span class="line">            System.out.println(<span class="string">"文件"</span>+file.getName()+<span class="string">"太大啦，无法计算该文件的MD5值.."</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/31/删除文件夹中重复文件/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+  <div>
+    
+  </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -984,7 +914,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1006,7 +936,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
